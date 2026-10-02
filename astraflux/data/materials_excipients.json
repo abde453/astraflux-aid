@@ -1,0 +1,378 @@
+{
+  "Microcrystalline_Cellulose": {
+    "category": "filler_binder",
+    "density": 1.5,
+    "solubility": 0.01,
+    "compressibility": 0.2,
+    "hygroscopicity": 0.45,
+    "temp_limit": 230.0
+  },
+  "Croscarmellose_Sodium": {
+    "category": "disintegrant",
+    "density": 1.5,
+    "swelling_index": 10.0,
+    "solubility": 0.0,
+    "hygroscopicity": 0.8,
+    "temp_limit": 200.0
+  },
+  "Magnesium_Stearate": {
+    "category": "lubricant",
+    "density": 1.03,
+    "hydrophobicity_factor": 0.85,
+    "solubility": 0.0
+  },
+  "Lactose_Monohydrate": {
+    "category": "filler_binder",
+    "density": 1.54,
+    "solubility": 21.6,
+    "compressibility": 0.15,
+    "hygroscopicity": 0.05,
+    "temp_limit": 202.0
+  },
+  "Lactose_Anhydrous": {
+    "category": "filler_binder",
+    "density": 1.52,
+    "solubility": 25.0,
+    "compressibility": 0.18,
+    "hygroscopicity": 0.1,
+    "temp_limit": 232.0
+  },
+  "Mannitol": {
+    "category": "filler_binder",
+    "density": 1.51,
+    "solubility": 18.0,
+    "compressibility": 0.19,
+    "hygroscopicity": 0.02,
+    "temp_limit": 166.0
+  },
+  "Sorbitol": {
+    "category": "filler_binder",
+    "density": 1.49,
+    "solubility": 70.0,
+    "compressibility": 0.22,
+    "hygroscopicity": 0.65,
+    "temp_limit": 110.0
+  },
+  "Xylitol": {
+    "category": "filler_binder",
+    "density": 1.52,
+    "solubility": 64.0,
+    "compressibility": 0.16,
+    "hygroscopicity": 0.2,
+    "temp_limit": 92.0
+  },
+  "Erythritol": {
+    "category": "filler_binder",
+    "density": 1.45,
+    "solubility": 37.0,
+    "compressibility": 0.14,
+    "hygroscopicity": 0.05,
+    "temp_limit": 121.0
+  },
+  "Isomalt": {
+    "category": "filler_binder",
+    "density": 1.5,
+    "solubility": 25.0,
+    "compressibility": 0.17,
+    "hygroscopicity": 0.08,
+    "temp_limit": 145.0
+  },
+  "Maltodextrin": {
+    "category": "filler_binder",
+    "density": 1.4,
+    "solubility": 40.0,
+    "compressibility": 0.25,
+    "hygroscopicity": 0.5,
+    "temp_limit": 240.0
+  },
+  "Sucrose": {
+    "category": "filler_binder",
+    "density": 1.59,
+    "solubility": 66.0,
+    "compressibility": 0.15,
+    "hygroscopicity": 0.15,
+    "temp_limit": 186.0
+  },
+  "Dextrose": {
+    "category": "filler_binder",
+    "density": 1.54,
+    "solubility": 45.0,
+    "compressibility": 0.18,
+    "hygroscopicity": 0.2,
+    "temp_limit": 146.0
+  },
+  "Trehalose": {
+    "category": "filler_binder",
+    "density": 1.58,
+    "solubility": 40.0,
+    "compressibility": 0.21,
+    "hygroscopicity": 0.05,
+    "temp_limit": 210.0
+  },
+  "Calcium_Carbonate": {
+    "category": "filler_binder",
+    "density": 2.71,
+    "solubility": 0.0,
+    "compressibility": 0.12,
+    "hygroscopicity": 0.02,
+    "temp_limit": 825.0
+  },
+  "Dibasic_Calcium_Phosphate_Dihydrate": {
+    "category": "filler_binder",
+    "density": 2.31,
+    "solubility": 0.0,
+    "compressibility": 0.15,
+    "hygroscopicity": 0.05,
+    "temp_limit": 109.0
+  },
+  "Dibasic_Calcium_Phosphate_Anhydrous": {
+    "category": "filler_binder",
+    "density": 2.89,
+    "solubility": 0.0,
+    "compressibility": 0.14,
+    "hygroscopicity": 0.1,
+    "temp_limit": 250.0
+  },
+  "Tribasic_Calcium_Phosphate": {
+    "category": "filler_binder",
+    "density": 3.14,
+    "solubility": 0.0,
+    "compressibility": 0.11,
+    "hygroscopicity": 0.05,
+    "temp_limit": 1670.0
+  },
+  "Calcium_Sulfate_Dihydrate": {
+    "category": "filler_binder",
+    "density": 2.32,
+    "solubility": 0.2,
+    "compressibility": 0.13,
+    "hygroscopicity": 0.03,
+    "temp_limit": 128.0
+  },
+  "Pregelatinized_Starch": {
+    "category": "filler_binder",
+    "density": 1.5,
+    "solubility": 5.0,
+    "compressibility": 0.28,
+    "hygroscopicity": 0.45,
+    "temp_limit": 190.0
+  },
+  "Corn_Starch": {
+    "category": "filler_binder",
+    "density": 1.48,
+    "solubility": 0.01,
+    "compressibility": 0.25,
+    "hygroscopicity": 0.5,
+    "temp_limit": 200.0
+  },
+  "Potato_Starch": {
+    "category": "filler_binder",
+    "density": 1.5,
+    "solubility": 0.01,
+    "compressibility": 0.26,
+    "hygroscopicity": 0.55,
+    "temp_limit": 200.0
+  },
+  "Wheat_Starch": {
+    "category": "filler_binder",
+    "density": 1.49,
+    "solubility": 0.01,
+    "compressibility": 0.25,
+    "hygroscopicity": 0.48,
+    "temp_limit": 200.0
+  },
+  "Povidone_K30": {
+    "category": "filler_binder",
+    "density": 1.18,
+    "solubility": 50.0,
+    "compressibility": 0.35,
+    "hygroscopicity": 0.8,
+    "temp_limit": 150.0
+  },
+  "Copovidone": {
+    "category": "filler_binder",
+    "density": 1.2,
+    "solubility": 45.0,
+    "compressibility": 0.3,
+    "hygroscopicity": 0.75,
+    "temp_limit": 140.0
+  },
+  "Hydroxypropyl_Cellulose": {
+    "category": "filler_binder",
+    "density": 1.25,
+    "solubility": 30.0,
+    "compressibility": 0.28,
+    "hygroscopicity": 0.6,
+    "temp_limit": 130.0
+  },
+  "Hypromellose_2910": {
+    "category": "filler_binder",
+    "density": 1.33,
+    "solubility": 25.0,
+    "compressibility": 0.27,
+    "hygroscopicity": 0.55,
+    "temp_limit": 190.0
+  },
+  "Gelatin": {
+    "category": "filler_binder",
+    "density": 1.35,
+    "solubility": 40.0,
+    "compressibility": 0.3,
+    "hygroscopicity": 0.7,
+    "temp_limit": 100.0
+  },
+  "Sodium_Alginate": {
+    "category": "filler_binder",
+    "density": 1.6,
+    "solubility": 10.0,
+    "compressibility": 0.22,
+    "hygroscopicity": 0.65,
+    "temp_limit": 150.0
+  },
+  "Xanthan_Gum": {
+    "category": "filler_binder",
+    "density": 1.5,
+    "solubility": 5.0,
+    "compressibility": 0.25,
+    "hygroscopicity": 0.7,
+    "temp_limit": 170.0
+  },
+  "Guar_Gum": {
+    "category": "filler_binder",
+    "density": 1.45,
+    "solubility": 2.0,
+    "compressibility": 0.24,
+    "hygroscopicity": 0.6,
+    "temp_limit": 180.0
+  },
+  "Silicified_Microcrystalline_Cellulose": {
+    "category": "filler_binder",
+    "density": 1.52,
+    "solubility": 0.01,
+    "compressibility": 0.15,
+    "hygroscopicity": 0.4,
+    "temp_limit": 240.0
+  },
+  "Sodium_Starch_Glycolate": {
+    "category": "disintegrant",
+    "density": 1.49,
+    "swelling_index": 12.0,
+    "solubility": 0.02,
+    "hygroscopicity": 0.65,
+    "temp_limit": 200.0
+  },
+  "Crospovidone": {
+    "category": "disintegrant",
+    "density": 1.22,
+    "swelling_index": 8.0,
+    "solubility": 0.0,
+    "hygroscopicity": 0.5,
+    "temp_limit": 150.0
+  },
+  "Alginic_Acid": {
+    "category": "disintegrant",
+    "density": 1.6,
+    "swelling_index": 5.0,
+    "solubility": 0.01,
+    "hygroscopicity": 0.6,
+    "temp_limit": 200.0
+  },
+  "Low_Substituted_Hydroxypropyl_Cellulose": {
+    "category": "disintegrant",
+    "density": 1.3,
+    "swelling_index": 6.5,
+    "solubility": 0.05,
+    "hygroscopicity": 0.55,
+    "temp_limit": 180.0
+  },
+  "Polacrilin_Potassium": {
+    "category": "disintegrant",
+    "density": 1.25,
+    "swelling_index": 15.0,
+    "solubility": 0.0,
+    "hygroscopicity": 0.75,
+    "temp_limit": 250.0
+  },
+  "Calcium_Alginate": {
+    "category": "disintegrant",
+    "density": 1.65,
+    "swelling_index": 4.0,
+    "solubility": 0.0,
+    "hygroscopicity": 0.45,
+    "temp_limit": 200.0
+  },
+  "Soy_Polysaccharide": {
+    "category": "disintegrant",
+    "density": 1.4,
+    "swelling_index": 7.0,
+    "solubility": 0.0,
+    "hygroscopicity": 0.5,
+    "temp_limit": 180.0
+  },
+  "Calcium_Stearate": {
+    "category": "lubricant",
+    "density": 1.08,
+    "hydrophobicity_factor": 0.82,
+    "solubility": 0.0
+  },
+  "Zinc_Stearate": {
+    "category": "lubricant",
+    "density": 1.09,
+    "hydrophobicity_factor": 0.88,
+    "solubility": 0.0
+  },
+  "Stearic_Acid": {
+    "category": "lubricant",
+    "density": 0.94,
+    "hydrophobicity_factor": 0.9,
+    "solubility": 0.0
+  },
+  "Sodium_Stearyl_Fumarate": {
+    "category": "lubricant",
+    "density": 1.15,
+    "hydrophobicity_factor": 0.75,
+    "solubility": 0.01
+  },
+  "Glyceryl_Behenate": {
+    "category": "lubricant",
+    "density": 0.94,
+    "hydrophobicity_factor": 0.78,
+    "solubility": 0.0
+  },
+  "Hydrogenated_Castor_Oil": {
+    "category": "lubricant",
+    "density": 0.99,
+    "hydrophobicity_factor": 0.8,
+    "solubility": 0.0
+  },
+  "Hydrogenated_Vegetable_Oil_Type_I": {
+    "category": "lubricant",
+    "density": 0.95,
+    "hydrophobicity_factor": 0.85,
+    "solubility": 0.0
+  },
+  "Mineral_Oil_Light": {
+    "category": "lubricant",
+    "density": 0.85,
+    "hydrophobicity_factor": 0.95,
+    "solubility": 0.0
+  },
+  "Polyethylene_Glycol_4000": {
+    "category": "lubricant",
+    "density": 1.2,
+    "hydrophobicity_factor": 0.15,
+    "solubility": 60.0
+  },
+  "Polyethylene_Glycol_6000": {
+    "category": "lubricant",
+    "density": 1.21,
+    "hydrophobicity_factor": 0.12,
+    "solubility": 65.0
+  },
+  "Sodium_Lauryl_Sulfate": {
+    "category": "lubricant",
+    "density": 1.1,
+    "hydrophobicity_factor": 0.05,
+    "solubility": 15.0
+  }
+}

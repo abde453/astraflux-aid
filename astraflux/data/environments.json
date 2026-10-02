@@ -1,0 +1,20 @@
+[
+    {
+        "name": "mouth",
+        "pH": 6.8,
+        "duration": 60,
+        "agitation": 0.5
+    },
+    {
+        "name": "stomach",
+        "pH": 2.0,
+        "duration": 7200,
+        "agitation": 1.5
+    },
+    {
+        "name": "intestine",
+        "pH": 7.0,
+        "duration": 14400,
+        "agitation": 1.0
+    }
+]

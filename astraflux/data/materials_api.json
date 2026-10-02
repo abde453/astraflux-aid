@@ -1,0 +1,352 @@
+{
+  "Ibuprofen": {
+    "solubility": 0.021,
+    "density": 1.03,
+    "molecular_weight": 206.29,
+    "hygroscopicity": 0.05,
+    "temp_limit": 160.0
+  },
+  "Paracetamol": {
+    "solubility": 12.7,
+    "density": 1.26,
+    "molecular_weight": 151.16,
+    "hygroscopicity": 0.05,
+    "temp_limit": 160.0
+  },
+  "Aspirin": {
+    "solubility": 3.3,
+    "density": 1.40,
+    "molecular_weight": 180.16,
+    "hygroscopicity": 0.08,
+    "temp_limit": 135.0
+  },
+  "Naproxen": {
+    "solubility": 0.015,
+    "density": 1.25,
+    "molecular_weight": 230.26,
+    "hygroscopicity": 0.02,
+    "temp_limit": 153.0
+  },
+  "Diclofenac_Sodium": {
+    "solubility": 2.37,
+    "density": 1.36,
+    "molecular_weight": 318.13,
+    "hygroscopicity": 0.05,
+    "temp_limit": 284.0
+  },
+  "Celecoxib": {
+    "solubility": 0.003,
+    "density": 1.33,
+    "molecular_weight": 381.37,
+    "hygroscopicity": 0.01,
+    "temp_limit": 157.0
+  },
+  "Meloxicam": {
+    "solubility": 0.007,
+    "density": 1.61,
+    "molecular_weight": 351.40,
+    "hygroscopicity": 0.02,
+    "temp_limit": 254.0
+  },
+  "Atorvastatin_Calcium": {
+    "solubility": 0.1,
+    "density": 1.18,
+    "molecular_weight": 1155.36,
+    "hygroscopicity": 0.06,
+    "temp_limit": 159.0
+  },
+  "Simvastatin": {
+    "solubility": 0.03,
+    "density": 1.11,
+    "molecular_weight": 418.57,
+    "hygroscopicity": 0.01,
+    "temp_limit": 139.0
+  },
+  "Rosuvastatin": {
+    "solubility": 0.08,
+    "density": 1.21,
+    "molecular_weight": 481.54,
+    "hygroscopicity": 0.04,
+    "temp_limit": 122.0
+  },
+  "Amlodipine_Besylate": {
+    "solubility": 7.5,
+    "density": 1.22,
+    "molecular_weight": 567.05,
+    "hygroscopicity": 0.05,
+    "temp_limit": 199.0
+  },
+  "Lisinopril": {
+    "solubility": 97.0,
+    "density": 1.25,
+    "molecular_weight": 405.49,
+    "hygroscopicity": 0.12,
+    "temp_limit": 160.0
+  },
+  "Losartan_Potassium": {
+    "solubility": 330.0,
+    "density": 1.30,
+    "molecular_weight": 461.01,
+    "hygroscopicity": 0.15,
+    "temp_limit": 183.0
+  },
+  "Metoprolol_Tartrate": {
+    "solubility": 1000.0,
+    "density": 1.15,
+    "molecular_weight": 684.81,
+    "hygroscopicity": 0.10,
+    "temp_limit": 120.0
+  },
+  "Valsartan": {
+    "solubility": 0.18,
+    "density": 1.17,
+    "molecular_weight": 435.52,
+    "hygroscopicity": 0.03,
+    "temp_limit": 116.0
+  },
+  "Clopidogrel_Bisulfate": {
+    "solubility": 0.05,
+    "density": 1.33,
+    "molecular_weight": 419.90,
+    "hygroscopicity": 0.06,
+    "temp_limit": 184.0
+  },
+  "Amoxicillin": {
+    "solubility": 3.4,
+    "density": 1.45,
+    "molecular_weight": 365.40,
+    "hygroscopicity": 0.08,
+    "temp_limit": 194.0
+  },
+  "Azithromycin": {
+    "solubility": 0.5,
+    "density": 1.18,
+    "molecular_weight": 749.00,
+    "hygroscopicity": 0.07,
+    "temp_limit": 113.0
+  },
+  "Ciprofloxacin": {
+    "solubility": 0.08,
+    "density": 1.40,
+    "molecular_weight": 331.34,
+    "hygroscopicity": 0.04,
+    "temp_limit": 255.0
+  },
+  "Doxycycline": {
+    "solubility": 50.0,
+    "density": 1.63,
+    "molecular_weight": 444.43,
+    "hygroscopicity": 0.09,
+    "temp_limit": 201.0
+  },
+  "Cephalexin": {
+    "solubility": 12.0,
+    "density": 1.50,
+    "molecular_weight": 347.39,
+    "hygroscopicity": 0.05,
+    "temp_limit": 326.0
+  },
+  "Levofloxacin": {
+    "solubility": 30.0,
+    "density": 1.50,
+    "molecular_weight": 361.37,
+    "hygroscopicity": 0.06,
+    "temp_limit": 225.0
+  },
+  "Sertraline_HCl": {
+    "solubility": 3.8,
+    "density": 1.20,
+    "molecular_weight": 342.69,
+    "hygroscopicity": 0.03,
+    "temp_limit": 246.0
+  },
+  "Fluoxetine_HCl": {
+    "solubility": 14.0,
+    "density": 1.15,
+    "molecular_weight": 345.79,
+    "hygroscopicity": 0.02,
+    "temp_limit": 158.0
+  },
+  "Escitalopram_Oxalate": {
+    "solubility": 13.0,
+    "density": 1.24,
+    "molecular_weight": 414.42,
+    "hygroscopicity": 0.05,
+    "temp_limit": 150.0
+  },
+  "Citalopram_HBr": {
+    "solubility": 15.0,
+    "density": 1.30,
+    "molecular_weight": 405.30,
+    "hygroscopicity": 0.04,
+    "temp_limit": 182.0
+  },
+  "Duloxetine_HCl": {
+    "solubility": 22.0,
+    "density": 1.25,
+    "molecular_weight": 333.88,
+    "hygroscopicity": 0.05,
+    "temp_limit": 170.0
+  },
+  "Venlafaxine_HCl": {
+    "solubility": 572.0,
+    "density": 1.20,
+    "molecular_weight": 313.86,
+    "hygroscopicity": 0.10,
+    "temp_limit": 215.0
+  },
+  "Gabapentin": {
+    "solubility": 450.0,
+    "density": 1.10,
+    "molecular_weight": 171.24,
+    "hygroscopicity": 0.08,
+    "temp_limit": 162.0
+  },
+  "Pregabalin": {
+    "solubility": 32.0,
+    "density": 1.13,
+    "molecular_weight": 159.23,
+    "hygroscopicity": 0.05,
+    "temp_limit": 225.0
+  },
+  "Metformin_HCl": {
+    "solubility": 346.0,
+    "density": 1.36,
+    "molecular_weight": 165.62,
+    "hygroscopicity": 0.15,
+    "temp_limit": 224.0
+  },
+  "Glipizide": {
+    "solubility": 0.003,
+    "density": 1.32,
+    "molecular_weight": 445.54,
+    "hygroscopicity": 0.01,
+    "temp_limit": 208.0
+  },
+  "Pioglitazone_HCl": {
+    "solubility": 0.01,
+    "density": 1.26,
+    "molecular_weight": 392.90,
+    "hygroscopicity": 0.02,
+    "temp_limit": 193.0
+  },
+  "Sitagliptin_Phosphate": {
+    "solubility": 100.0,
+    "density": 1.40,
+    "molecular_weight": 505.31,
+    "hygroscopicity": 0.10,
+    "temp_limit": 214.0
+  },
+  "Levothyroxine_Sodium": {
+    "solubility": 0.15,
+    "density": 1.45,
+    "molecular_weight": 798.85,
+    "hygroscopicity": 0.12,
+    "temp_limit": 235.0
+  },
+  "Omeprazole": {
+    "solubility": 0.13,
+    "density": 1.40,
+    "molecular_weight": 345.42,
+    "hygroscopicity": 0.05,
+    "temp_limit": 156.0
+  },
+  "Pantoprazole_Sodium": {
+    "solubility": 300.0,
+    "density": 1.35,
+    "molecular_weight": 405.35,
+    "hygroscopicity": 0.11,
+    "temp_limit": 149.0
+  },
+  "Lansoprazole": {
+    "solubility": 0.05,
+    "density": 1.45,
+    "molecular_weight": 369.36,
+    "hygroscopicity": 0.04,
+    "temp_limit": 166.0
+  },
+  "Ranitidine_HCl": {
+    "solubility": 660.0,
+    "density": 1.30,
+    "molecular_weight": 350.86,
+    "hygroscopicity": 0.20,
+    "temp_limit": 140.0
+  },
+  "Famotidine": {
+    "solubility": 1.0,
+    "density": 1.38,
+    "molecular_weight": 337.45,
+    "hygroscopicity": 0.04,
+    "temp_limit": 163.0
+  },
+  "Cetirizine_HCl": {
+    "solubility": 250.0,
+    "density": 1.25,
+    "molecular_weight": 461.81,
+    "hygroscopicity": 0.15,
+    "temp_limit": 225.0
+  },
+  "Loratadine": {
+    "solubility": 0.01,
+    "density": 1.20,
+    "molecular_weight": 382.88,
+    "hygroscopicity": 0.02,
+    "temp_limit": 134.0
+  },
+  "Fexofenadine_HCl": {
+    "solubility": 2.5,
+    "density": 1.15,
+    "molecular_weight": 538.12,
+    "hygroscopicity": 0.06,
+    "temp_limit": 195.0
+  },
+  "Montelukast_Sodium": {
+    "solubility": 0.5,
+    "density": 1.22,
+    "molecular_weight": 608.17,
+    "hygroscopicity": 0.08,
+    "temp_limit": 115.0
+  },
+  "Sildenafil_Citrate": {
+    "solubility": 3.5,
+    "density": 1.35,
+    "molecular_weight": 666.70,
+    "hygroscopicity": 0.04,
+    "temp_limit": 189.0
+  },
+  "Tadalafil": {
+    "solubility": 0.002,
+    "density": 1.40,
+    "molecular_weight": 389.40,
+    "hygroscopicity": 0.01,
+    "temp_limit": 302.0
+  },
+  "Prednisone": {
+    "solubility": 0.12,
+    "density": 1.30,
+    "molecular_weight": 358.43,
+    "hygroscopicity": 0.03,
+    "temp_limit": 233.0
+  },
+  "Dexamethasone": {
+    "solubility": 0.08,
+    "density": 1.32,
+    "molecular_weight": 392.46,
+    "hygroscopicity": 0.03,
+    "temp_limit": 262.0
+  },
+  "Tramadol_HCl": {
+    "solubility": 300.0,
+    "density": 1.15,
+    "molecular_weight": 299.84,
+    "hygroscopicity": 0.12,
+    "temp_limit": 180.0
+  },
+  "Warfarin_Sodium": {
+    "solubility": 100.0,
+    "density": 1.35,
+    "molecular_weight": 330.31,
+    "hygroscopicity": 0.15,
+    "temp_limit": 161.0
+  }
+}

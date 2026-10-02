@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AstraFlux AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0c1f33;--navy2:#16324d;--ink:#142435;--mute:#5d7084;--bg:#eef2f6;--card:#fff;--line:#d9e1e9;--blue:#1f5fbf;--blue2:#e8f0fc;--amber:#c27a0a;--ok:#16794a;--bad:#b3362b;--f:"IBM Plex Sans","IBM Plex Sans Arabic","Segoe UI",Tahoma,system-ui,sans-serif}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:14px/1.55 var(--f)}
+header{background:linear-gradient(100deg,var(--navy),var(--navy2));color:#fff;padding:0 clamp(16px,4vw,40px)}
+.top{max-width:1320px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px}.brand svg{width:34px;height:34px}
+.brand b{font-size:18px;font-weight:600;letter-spacing:.2px}.brand span{display:block;font-size:12px;color:#9db4cc;margin-top:-2px}
+.seg{display:flex;border:1px solid #3a5876;border-radius:8px;overflow:hidden}
+.seg button{background:transparent;color:#c9d8e8;border:0;padding:7px 14px;font:500 13px var(--f);cursor:pointer}
+.seg button[aria-pressed=true]{background:#fff;color:var(--navy)}
+.seg button:focus-visible{outline:2px solid #7fb0f0;outline-offset:-2px}
+.hero{max-width:1320px;margin:auto;padding:22px 0 26px}.hero h1{font-size:22px;font-weight:500;margin:0;max-width:760px;line-height:1.35}
+.hero p{margin:6px 0 0;color:#9db4cc;font-size:13px}
+main{display:grid;grid-template-columns:minmax(320px,430px) 1fr;gap:22px;padding:22px clamp(16px,4vw,40px) 40px;max-width:1400px;margin:auto}
+@media(max-width:920px){main{grid-template-columns:1fr}}
+section{background:var(--card);border:1px solid var(--line);border-radius:6px;margin-bottom:14px}
+section>h2{margin:0;padding:11px 16px;font-size:13px;font-weight:600;border-bottom:1px solid var(--line);background:#f7f9fb;border-radius:6px 6px 0 0}
+.body{padding:14px 16px}
+label{display:block;font-size:12px;color:var(--mute);margin:8px 0 3px;font-weight:500}
+input,select,button{font:inherit;color:inherit}
+input,select{width:100%;padding:7px 9px;border:1px solid #c5d0db;border-radius:4px;background:#fff;min-width:0}
+input:focus-visible,select:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
+.row{display:grid;grid-template-columns:1fr 92px 30px;gap:6px;margin-bottom:6px;align-items:center}
+.row4{display:grid;grid-template-columns:2.4fr .8fr 1fr .8fr 26px;gap:6px;margin-bottom:6px}
+.hd{display:grid;grid-template-columns:2.4fr .8fr 1fr .8fr 26px;gap:6px;font-size:11px;color:var(--mute);margin-bottom:3px}
+button{border:1px solid #c5d0db;background:#fff;padding:7px 12px;border-radius:4px;cursor:pointer;font-weight:500}
+button:hover{background:#f3f6f9}button.x{padding:3px;color:var(--bad);border-color:transparent}
+button.primary{background:var(--blue);color:#fff;border-color:var(--blue);width:100%;padding:11px;font-size:15px;font-weight:600}
+button.primary:hover{background:#1a52a6}button[disabled]{opacity:.6;cursor:wait}
+.bar{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.bar select{flex:1}
+#status{display:flex;gap:10px;align-items:center;padding:10px 14px;border-radius:6px;border:1px solid var(--line);border-inline-start:4px solid var(--mute);background:#fff;margin-bottom:14px;font-weight:500}
+#status.run{border-inline-start-color:var(--blue)}#status.ok{border-inline-start-color:var(--ok)}#status.err{border-inline-start-color:var(--bad);color:var(--bad)}
+.verdict{margin:0 0 14px;padding:11px 14px;border-radius:4px;font-weight:600}
+.verdict.pass{background:#e6f4ec;color:var(--ok);border:1px solid #bfe0cc}.verdict.fail{background:#fbebe9;color:var(--bad);border:1px solid #efc3be}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));border:1px solid var(--line);border-radius:4px;margin-bottom:16px}
+.kpi{padding:12px 14px;border-inline-end:1px solid var(--line)}.kpi:last-child{border:0}
+.kpi b{display:block;font-size:26px;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:-.3px}.kpi span{font-size:12px;color:var(--mute)}
+svg.ch{width:100%;height:auto;display:block}
+.small{font-size:12px;color:var(--mute)}.warn{font-size:12px;color:var(--mute);border-inline-start:3px solid var(--amber);padding:4px 10px}
+.hl{display:flex;justify-content:space-between;align-items:center;gap:10px}.hl button{padding:4px 10px;font-size:12px}
+table.m{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}table.m td,table.m th{border:1px solid var(--line);padding:5px 8px;text-align:start}table.m th{background:#f7f9fb}
+details{margin-bottom:6px}summary{cursor:pointer;font-weight:600}code{font-size:12px;background:#f3f6f9;padding:1px 4px;direction:ltr;unicode-bidi:embed}
+.sv{display:flex;justify-content:space-between;gap:6px;align-items:center;border-bottom:1px solid var(--line);padding:6px 0}.sv button{padding:3px 8px;font-size:12px}
+.page{display:none}.page.on{display:block}main.page.on{display:grid}.pg{max-width:1400px;margin:auto;padding:22px clamp(16px,4vw,40px)}
+nav{background:#fff;border-bottom:1px solid var(--line);display:flex;overflow-x:auto;padding:0 clamp(16px,4vw,40px)}nav button{border:0;border-bottom:3px solid transparent;border-radius:0;background:none;padding:12px 16px;white-space:nowrap}nav button[aria-current=true]{border-bottom-color:var(--blue);color:var(--blue);font-weight:600}
+.bd{font-size:11px;font-weight:600;padding:2px 8px;border-radius:10px;margin-inline-start:6px}.bd.ok{background:#e6f4ec;color:var(--ok)}.bd.part{background:#fdf1dc;color:var(--amber)}.bd.plan{background:#eceff3;color:var(--mute)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:12px 0}.cards .kpi{background:#fff;border:1px solid var(--line);border-radius:6px}
+@media print{nav,header .seg,.left,#status,.hl button{display:none}main{display:block}}
+</style>
+</head>
+<body>
+<header>
+ <div class="top">
+  <div class="brand">
+   <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="1" y="1" width="38" height="38" rx="9" fill="#1f5fbf"/><path d="M8 27c6 0 6-14 12-14s6 14 12 14" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/><circle cx="20" cy="13" r="2.6" fill="#fff"/></svg>
+   <div><b>AstraFlux AI</b><span id="sub"></span></div>
+  </div>
+  <div class="seg" role="group" aria-label="Language">
+   <button type="button" data-lang="en" aria-pressed="true">English</button>
+   <button type="button" data-lang="fr" aria-pressed="false">Français</button>
+   <button type="button" data-lang="ar" aria-pressed="false">العربية</button>
+  </div>
+ </div>
+ <div class="hero"><h1 data-i="tag"></h1><p data-i="proto"></p></div>
+</header>
+<nav id="nav" aria-label="Modules"></nav>
+<main id="pg-studio" class="page on">
+ <div class="left">
+  <section><h2 data-i="form"></h2><div class="body"><div id="comps"></div>
+   <div class="bar"><select id="addsel" aria-label="material"></select><button type="button" id="addbtn" data-i="add"></button></div></div></section>
+  <section><h2 data-i="coat"></h2><div class="body">
+   <label for="poly" data-i="poly"></label><select id="poly"></select>
+   <label for="cm" data-i="cmass"></label><input id="cm" type="number" step="1" min="0" max="500">
+   <label for="ct" data-i="cthick"></label><input id="ct" type="number" step="0.01" min="0.01" max="2"></div></section>
+  <section><h2 data-i="stages"></h2><div class="body"><div class="hd"><span data-i="stname"></span><span>pH</span><span data-i="dur"></span><span data-i="agi"></span><span></span></div><div id="stages"></div>
+   <div class="bar"><button type="button" id="addstage" data-i="addstage"></button></div></div></section>
+  <button class="primary" id="run" type="button" data-i="run"></button>
+  <div class="bar"><button type="button" id="demo" data-i="demo"></button></div>
+  <section style="margin-top:14px"><h2 data-i="saved"></h2><div class="body" id="savedlist"></div><div class="body small"><div class="bar"><select id="va" aria-label="A"></select><select id="vb" aria-label="B"></select><button type="button" id="vcmp">Diff</button></div><div id="vres"></div></div></section>
+ </div>
+ <div>
+  <div id="status" role="status" aria-live="polite"></div>
+  <section id="results" hidden>
+   <h2 class="hl"><span data-i="res"></span><button type="button" id="print" data-i="print"></button></h2>
+   <div class="body"><div id="verdict"></div><div class="kpis" id="kpis"></div>
+   <svg class="ch" id="chart" viewBox="0 0 680 330" role="img"></svg>
+   <p class="small" id="legend"></p><p class="small" id="store"></p><p class="small" id="bandnote"></p><p class="small" id="runinfo"></p>
+   <div class="bar"><button type="button" id="savebtn" data-i="save"></button><button type="button" id="dl" data-i="dl"></button></div></div>
+  </section>
+  <p class="warn" data-i="disc"></p>
+ </div>
+</main>
+<div id="pages">
+<div id="pg-dash" class="page pg"><div id="dash"></div></div>
+<div id="pg-data" class="page pg"><section><h2>Dataset manager <span class="bd ok">Saved on server</span></h2><div class="body"><p class="small">Upload a CSV, check the preview, map columns and units, then save it as a <b>calibration</b> or an independent <b>validation</b> dataset. The original file is stored unchanged.</p>
+ <input id="dsfile" type="file" accept=".csv,.txt" aria-label="CSV"><div id="dsmap"></div><div id="dslist"></div></div></section>
+ <section><h2>Kinetic model fitting <span class="bd part">Empirical models</span></h2><div class="body"><div class="bar"><select id="fitcal" aria-label="calibration"></select><select id="fitval" aria-label="validation"></select></div>
+ <div class="bar"><label class="small"><input type="checkbox" class="fm" value="first_order" checked style="width:auto"> First-order</label><label class="small"><input type="checkbox" class="fm" value="higuchi" checked style="width:auto"> Higuchi</label><label class="small"><input type="checkbox" class="fm" value="korsmeyer_peppas" checked style="width:auto"> Korsmeyer–Peppas</label><button type="button" id="fitrun">Fit</button></div><div id="fitres"></div></div></section>  <section id="expsec"><h2 data-i="exp"></h2><div class="body">
+   <label for="csv" data-i="expfile"></label><input id="csv" type="file" accept=".csv,.txt">
+   <label for="src" data-i="src"></label><input id="src" maxlength="200">
+   <label for="cond" data-i="cond"></label><input id="cond" maxlength="400">
+   <div class="bar"><button type="button" id="cmp" data-i="cmp"></button></div><div id="expinfo" class="small"></div><div id="cmpres"></div></div></section>
+</div>
+<!--DS-->
+<div id="pg-analysis" class="page pg">
+ <section><h2 data-i="n_runs"></h2><div class="body"><div class="bar"><select id="ra" aria-label="run A"></select><select id="rb" aria-label="run B"></select><button type="button" id="cmpruns" data-i="n_cmp"></button></div><div id="runcmp"></div></div></section>
+   <section><h2 data-i="mod"></h2><div class="body small" id="model">…</div></section>
+
+ <section><h2>Experimental fit · Uncertainty · Sensitivity</h2><div class="body small"><p><span class="bd part">Partial</span> Experimental fit: k_base only (Experimental Data tab).</p><p><span class="bd part">Partial</span> Uncertainty: sensitivity band to uncalibrated constants only; no statistical confidence intervals.</p><p><span class="bd plan">Planned</span> Global sensitivity analysis (Sobol/Morris), parameter identifiability and profile likelihood.</p></div></section>
+</div>
+<div id="pg-ai" class="page pg"><section><h2>AI &amp; PINN research module <span class="bd plan">Planned / not yet implemented</span></h2><div class="body small">
+ <p>No machine-learning or PINN model is connected. Nothing in this platform is "AI-predicted". Requirements before activation:</p>
+ <ul><li>Training-data scope: sources, number of formulations, conditions, licensing</li><li>Validation metrics on unseen formulations (RMSE, f2, calibration curves)</li><li>Uncertainty estimates (ensembles or Bayesian) and applicability-domain checks</li><li>Physics constraints for PINNs: governing equations, boundary/initial conditions, loss weights</li><li>Model card: version, training date, limitations</li></ul></div></section></div>
+<div id="pg-opt" class="page pg"><section><h2>Scenario comparison <span class="bd ok">Implemented</span></h2><div class="body">
+ <p class="small">Runs the real backend for each coating thickness using the current form values, then compares curves. It does not rank or recommend a "best" formulation.</p>
+ <label for="sw" data-i="swl"></label><input id="sw" value="0.05, 0.1, 0.15, 0.2"><div class="bar"><button type="button" id="swrun" data-i="swrun"></button></div><div id="swres"></div></div></section>
+ <section><h2>Automated optimisation <span class="bd plan">Planned / not yet implemented</span></h2><div class="body small">Objective functions, constraints and search algorithms (Bayesian optimisation, genetic algorithms) will be added only once the model is calibrated on real data.</div></section></div>
+<div id="pg-rep" class="page pg"><section><h2 class="hl"><span data-i="n_rep"></span><span><button type="button" id="rprint" data-i="print"></button> <button type="button" id="rhtml">HTML</button> <button type="button" id="rjson">JSON</button></span></h2><div class="body" id="rep"></div></section></div>
+</div>
+<script>
+const T={
+en:{sub:"Drug-delivery simulation platform",tag:"Predict how coated tablets release their drug across the digestive tract",proto:"Demo prototype v0.2 · public, non-confidential data",form:"Formulation (mg)",add:"Add",coat:"Polymer coating",poly:"Polymer",cmass:"Coating mass (mg)",cthick:"Coating thickness (mm)",stages:"Simulation stages",stname:"Stage",dur:"Duration (s)",agi:"Agitation",addstage:"Add stage",run:"Run simulation",demo:"Load demo scenario",res:"Results",print:"Print / PDF",disc:"Semi-quantitative model with uncalibrated constants; not a substitute for laboratory testing or regulatory evaluation.",none:"No coating",idle:"Ready. Load the demo scenario or edit the inputs, then run.",running:"Running simulation…",done:"Simulation completed in",fail:"Simulation failed: ",net:"Cannot reach the server",fin:"Final release",t50:"Time to 50%",t85:"Time to 85%",acid:"Release in acid stage",pass:"Acid-resistant (10% or less in the acid stage) — screening only",fail2:"Not acid-resistant (more than 10% in the acid stage) — try a thicker coating",time:"Time (min)",pct:"% released",limit:"Dashed line: 10% acid-stage limit",sto:"Suggested storage (indicative)",tmp:"Temperature",hum:"Humidity",upto:"up to",unit:"min",never:"not reached",st1:"Stomach (pH 1.2)",st2:"Intestine (pH 6.8)","Controlled room temperature":"Controlled room temperature","Refrigerated":"Refrigerated","Ultra-dry ambient":"Ultra-dry ambient"},
+fr:{sub:"Plateforme de simulation de libération de médicaments",tag:"Prédisez comment les comprimés enrobés libèrent leur principe actif dans le tube digestif",proto:"Prototype de démonstration v0.2 · données publiques non confidentielles",form:"Formulation (mg)",add:"Ajouter",coat:"Enrobage polymère",poly:"Polymère",cmass:"Masse d’enrobage (mg)",cthick:"Épaisseur d’enrobage (mm)",stages:"Étapes de simulation",stname:"Étape",dur:"Durée (s)",agi:"Agitation",addstage:"Ajouter une étape",run:"Lancer la simulation",demo:"Charger le scénario de démo",res:"Résultats",print:"Imprimer / PDF",disc:"Modèle semi-quantitatif à constantes non calibrées ; ne remplace ni les essais en laboratoire ni l’évaluation réglementaire.",none:"Sans enrobage",idle:"Prêt. Chargez le scénario de démo ou modifiez les entrées, puis lancez.",running:"Simulation en cours…",done:"Simulation terminée en",fail:"Échec de la simulation : ",net:"Serveur injoignable",fin:"Libération finale",t50:"Temps pour 50 %",t85:"Temps pour 85 %",acid:"Libération en milieu acide",pass:"Résistant à l’acide (10 % ou moins en milieu acide) — criblage uniquement",fail2:"Non résistant à l’acide (plus de 10 % en milieu acide) — essayez un enrobage plus épais",time:"Temps (min)",pct:"% libéré",limit:"Ligne pointillée : limite de 10 % en milieu acide",sto:"Stockage suggéré (indicatif)",tmp:"Température",hum:"Humidité",upto:"jusqu’à",unit:"min",never:"non atteint",st1:"Estomac (pH 1,2)",st2:"Intestin (pH 6,8)","Controlled room temperature":"Température ambiante contrôlée","Refrigerated":"Réfrigéré","Ultra-dry ambient":"Ambiance ultra-sèche"},
+ar:{sub:"منصة محاكاة توصيل الأدوية",tag:"تنبّأ بكيفية تحرر الدواء من الأقراص المغلّفة عبر الجهاز الهضمي",proto:"نموذج أولي تجريبي v0.2 · بيانات عامة غير سرية",form:"التركيبة (ملغ)",add:"إضافة",coat:"الطلاء البوليميري",poly:"البوليمر",cmass:"كتلة الطلاء (ملغ)",cthick:"سُمك الطلاء (مم)",stages:"مراحل المحاكاة",stname:"المرحلة",dur:"المدة (ث)",agi:"التحريك",addstage:"إضافة مرحلة",run:"تشغيل المحاكاة",demo:"تحميل السيناريو التجريبي",res:"النتائج",print:"طباعة / PDF",disc:"نموذج شبه كمّي بثوابت غير معايَرة؛ لا يغني عن الاختبار المخبري ولا عن التقييم التنظيمي.",none:"بدون طلاء",idle:"جاهز. حمّل السيناريو التجريبي أو عدّل المدخلات ثم شغّل المحاكاة.",running:"جارٍ تشغيل المحاكاة…",done:"اكتملت المحاكاة في",fail:"فشلت المحاكاة: ",net:"تعذّر الاتصال بالخادم",fin:"التحرر النهائي",t50:"زمن تحرر 50%",t85:"زمن تحرر 85%",acid:"التحرر في الوسط الحمضي",pass:"مقاوم للوسط الحمضي (10% أو أقل في مرحلة الحمض) — فحص أولي",fail2:"غير مقاوم للوسط الحمضي (أكثر من 10% في مرحلة الحمض) — جرّب طلاءً أسمك",time:"الزمن (دقيقة)",pct:"% محرَّر",limit:"الخط المتقطع: حد 10% في الوسط الحمضي",sto:"التخزين المقترح (تقديري)",tmp:"الحرارة",hum:"الرطوبة",upto:"حتى",unit:"دقيقة",never:"لم يُبلغ",st1:"المعدة (pH 1.2)",st2:"الأمعاء (pH 6.8)","Controlled room temperature":"درجة حرارة الغرفة المضبوطة","Refrigerated":"مبرَّد","Ultra-dry ambient":"محيط جاف جداً"}};
+Object.assign(T.en,{exp:"Experimental data (real measurements)",expfile:"CSV file: time_min, release_pct",src:"Source / provenance",cond:"Experimental conditions (apparatus, medium, rpm, batch)",cmp:"Compare with model and test on held-out points",mod:"Model, equations, assumptions and limits",save:"Save formulation",saved:"Saved formulations",dl:"Download run record (JSON)",rerun:"Re-run",del:"Delete",band:"Shaded band: sensitivity to a x0.5-x2 change of the uncalibrated constants. It is NOT a statistical confidence interval.",nosaved:"No saved formulations yet.",repro:"Reproduced: identical run ID",runid:"Run ID",nodata:"Run a simulation first, then load a CSV.",pts:"points loaded",planned:"Planned / not yet implemented",eq:"Equations",asm:"Assumptions",units:"Units",lim:"Validity limits"});
+Object.assign(T.fr,{exp:"Données expérimentales (mesures réelles)",expfile:"Fichier CSV : time_min, release_pct",src:"Source / provenance",cond:"Conditions expérimentales (appareil, milieu, tr/min, lot)",cmp:"Comparer au modèle et tester sur points exclus",mod:"Modèle, équations, hypothèses et limites",save:"Enregistrer la formulation",saved:"Formulations enregistrées",dl:"Télécharger le rapport d’exécution (JSON)",rerun:"Relancer",del:"Supprimer",band:"Bande grisée : sensibilité à un facteur x0,5-x2 des constantes non calibrées. Ce n’est PAS un intervalle de confiance statistique.",nosaved:"Aucune formulation enregistrée.",repro:"Reproduit : même identifiant d’exécution",runid:"ID d’exécution",nodata:"Lancez d’abord une simulation, puis chargez un CSV.",pts:"points chargés",planned:"Prévu / non implémenté",eq:"Équations",asm:"Hypothèses",units:"Unités",lim:"Limites de validité"});
+Object.assign(T.ar,{exp:"البيانات التجريبية (قياسات حقيقية)",expfile:"ملف CSV: time_min, release_pct",src:"المصدر / الأصل",cond:"الظروف التجريبية (الجهاز، الوسط، rpm، الدفعة)",cmp:"مقارنة بالنموذج واختبار على نقاط مستبعدة",mod:"النموذج والمعادلات والافتراضات والحدود",save:"حفظ التركيبة",saved:"التركيبات المحفوظة",dl:"تنزيل سجل التشغيل (JSON)",rerun:"إعادة التشغيل",del:"حذف",band:"النطاق المظلل: حساسية النتيجة لتغيير الثوابت غير المعايَرة بمعامل 0.5–2. وهو ليس فاصل ثقة إحصائياً.",nosaved:"لا توجد تركيبات محفوظة.",repro:"أُعيد الإنتاج: نفس معرّف التشغيل",runid:"معرّف التشغيل",nodata:"شغّل المحاكاة أولاً ثم حمّل ملف CSV.",pts:"نقطة محمّلة",planned:"مخطط / غير منفّذ بعد",eq:"المعادلات",asm:"الافتراضات",units:"الوحدات",lim:"حدود الصلاحية"});
+Object.assign(T.en,{n_dash:"Dashboard",n_studio:"Formulation & Simulation",n_data:"Experimental Data",n_analysis:"Model Analysis",n_ai:"AI & PINN",n_opt:"Optimization",n_rep:"Reports",n_runs:"Compare saved runs",n_cmp:"Compare",swl:"Coating thickness values (mm, comma-separated)",swrun:"Run scenarios"});
+Object.assign(T.fr,{n_dash:"Tableau de bord",n_studio:"Formulation et simulation",n_data:"Données expérimentales",n_analysis:"Analyse du modèle",n_ai:"IA et PINN",n_opt:"Optimisation",n_rep:"Rapports",n_runs:"Comparer les exécutions",n_cmp:"Comparer",swl:"Épaisseurs d’enrobage (mm, séparées par des virgules)",swrun:"Lancer les scénarios"});
+Object.assign(T.ar,{n_dash:"لوحة التحكم",n_studio:"التركيبة والمحاكاة",n_data:"البيانات التجريبية",n_analysis:"تحليل النموذج",n_ai:"الذكاء الاصطناعي وPINN",n_opt:"التحسين",n_rep:"التقارير",n_runs:"مقارنة التشغيلات المحفوظة",n_cmp:"مقارنة",swl:"قيم سُمك الطلاء (مم، مفصولة بفواصل)",swrun:"تشغيل السيناريوهات"});
+const LS=["en","fr","ar"];let L="en",CAT=null,comps=[],stages=[],last=null,lastReq=null,kBase=null,expectId=null,EXP=null,OVER={fit:null,tr:null,te:null};
+const $=id=>document.getElementById(id),t=k=>T[L][k]??T.en[k]??k,nice=s=>s.replace(/_/g," ");
+const tr=n=>{for(const k of["st1","st2"])for(const l of LS)if(T[l][k]===n)return T[L][k];return n};
+function setStatus(c,m){const s=$("status");s.className=c;s.dataset.s=c;s.textContent=m||t("idle")}
+function setLang(l,save){L=l;try{if(save)localStorage.setItem("af_lang",l)}catch(e){}
+ document.documentElement.lang=l;document.documentElement.dir=l=="ar"?"rtl":"ltr";
+ document.querySelectorAll(".seg button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.lang==l));
+ document.querySelectorAll("[data-i]").forEach(e=>e.textContent=t(e.dataset.i));$("sub").textContent=t("sub");
+ stages.forEach(s=>s.name=tr(s.name));if(CAT)fillPoly();renderComps();renderStages();
+ if(!$("status").dataset.s||$("status").dataset.s=="idle")setStatus("idle");if(last)show(last);if(CAT){renderSaved();loadModel()}}
+function fillPoly(){const c=$("poly").value;$("poly").innerHTML=`<option value="">${t("none")}</option>`+Object.keys(CAT.polymers).map(p=>`<option value="${p}">${nice(p)} (pH ${CAT.polymers[p].dissolve_pH_threshold}+)</option>`).join("");$("poly").value=c}
+function fillAdd(){const o=g=>CAT[g].map(n=>`<option value="${n}">${nice(n)}</option>`).join("");$("addsel").innerHTML=`<optgroup label="API">${o("apis")}</optgroup><optgroup label="Excipients">${o("excipients")}</optgroup>`}
+function renderComps(){$("comps").innerHTML="";comps.forEach((c,i)=>{const d=document.createElement("div");d.className="row";d.innerHTML=`<span>${nice(c.name)}</span><input type="number" min="0.1" max="5000" step="1" value="${c.mass_mg}" aria-label="mg"><button class="x" type="button" aria-label="remove">✕</button>`;
+ d.querySelector("input").oninput=e=>c.mass_mg=+e.target.value;d.querySelector("button").onclick=()=>{comps.splice(i,1);renderComps()};$("comps").appendChild(d)})}
+function renderStages(){$("stages").innerHTML="";stages.forEach((s,i)=>{const d=document.createElement("div");d.className="row4";
+ d.innerHTML=`<input dir="auto" title="${s.name}" value="${s.name}" aria-label="${t("stname")}"><input type="number" step="0.1" min="0" max="14" value="${s.pH}" aria-label="pH"><input type="number" min="1" value="${s.duration_s}" aria-label="${t("dur")}"><input type="number" step="0.1" min="0.1" value="${s.agitation}" aria-label="${t("agi")}"><button class="x" type="button" aria-label="remove">✕</button>`;
+ const q=d.querySelectorAll("input");q[0].oninput=e=>s.name=e.target.value;q[1].oninput=e=>s.pH=+e.target.value;q[2].oninput=e=>s.duration_s=+e.target.value;q[3].oninput=e=>s.agitation=+e.target.value;
+ d.querySelector("button").onclick=()=>{stages.splice(i,1);renderStages()};$("stages").appendChild(d)})}
+function loadDemo(){const D=CAT.demo;comps=JSON.parse(JSON.stringify(D.components));stages=JSON.parse(JSON.stringify(D.stages));stages.forEach((s,i)=>s.name=t(i?"st2":"st1"));$("poly").value=D.polymer;$("cm").value=D.coating_mass_mg;$("ct").value=D.coating_thickness_mm;renderComps();renderStages()}
+async function run(){const b=$("run");b.disabled=true;setStatus("run",t("running"));
+ const body={components:comps,polymer:$("poly").value||null,coating_mass_mg:+$("cm").value||0,coating_thickness_mm:+$("ct").value||0.05,stages:stages.map(s=>({...s,name:s.name||"stage"})),k_base:kBase??CAT.demo.k_base,dt_s:2,include_band:true};
+ try{const r=await fetch("/api/simulate",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});const j=await r.json();
+  if(!r.ok){const d=j.detail;setStatus("err",t("fail")+(typeof d=="string"?d:d?d.map(x=>x.loc.slice(1).join(".")+": "+x.msg).join("; "):r.status));return}
+  last=j;lastReq=body;addRun(j);OVER.fit=OVER.tr=OVER.te=null;show(j);setStatus("ok",`${t("done")} ${j.runtime_s} s`+(expectId?(j.run_id==expectId?" — "+t("repro")+" "+j.run_id:" — ID ≠ "+expectId):""));expectId=null}catch(e){setStatus("err",t("fail")+t("net"))}finally{b.disabled=false}}
+const mn=s=>s==null?t("never"):(s/60).toFixed(1)+" "+t("unit"),fm=x=>new Intl.NumberFormat(L=="ar"?"en":L,{maximumFractionDigits:2}).format(x);
+function show(j){$("results").hidden=false;const S=j.summary;
+ $("verdict").innerHTML=S.gastric_resistant===undefined?"":`<div class="verdict ${S.gastric_resistant?"pass":"fail"}">${S.gastric_resistant?"✔":"✘"} ${t(S.gastric_resistant?"pass":"fail2")}</div>`;
+ const k=[[fm(S.final_released_pct)+"%",t("fin")],[mn(S.t50_s),t("t50")],[mn(S.t85_s),t("t85")]];if(S.acid_stage_release_pct!==undefined)k.unshift([fm(S.acid_stage_release_pct)+"%",t("acid")]);
+ $("kpis").innerHTML=k.map(x=>`<div class="kpi"><b>${x[0]}</b><span>${x[1]}</span></div>`).join("");
+ const st=j.storage;$("store").textContent=`${t("sto")}: ${t("tmp")} ${t("upto")} ${st.target_temp_c} °C; ${t("hum")} ${t("upto")} ${st.target_humidity_pct} % — ${t(st.label)||st.label}`;$("legend").textContent=t("limit");$("bandnote").textContent=j.band?t("band"):"";$("runinfo").textContent=`${t("runid")}: ${j.run_id} · model ${j.model_version} · data ${j.data_version} · ${j.created_utc}`;chart(j)}
+function chart(j){const W=680,H=330,m={l:46,r:14,t:16,b:40},pw=W-m.l-m.r,ph=H-m.t-m.b,T0=j.stage_bounds_s.at(-1).end;
+ const X=s=>m.l+pw*s/T0,Y=p=>m.t+ph*(1-p/100),cols=["#c27a0a","#1f5fbf","#16794a","#5d7084"];let g="";
+ j.stage_bounds_s.forEach((b,i)=>{g+=`<rect x="${X(b.start)}" y="${m.t}" width="${X(b.end)-X(b.start)}" height="${ph}" fill="${cols[i%4]}" opacity=".09"/><text x="${(X(b.start)+X(b.end))/2}" y="${m.t+15}" text-anchor="middle" font-size="12" fill="#5d7084">${tr(b.name)}</text>`});
+ for(let p=0;p<=100;p+=25)g+=`<line x1="${m.l}" x2="${W-m.r}" y1="${Y(p)}" y2="${Y(p)}" stroke="#d9e1e9"/><text x="${m.l-7}" y="${Y(p)+4}" text-anchor="end" font-size="11" fill="#5d7084">${p}</text>`;
+ for(let i=0;i<=6;i++){const s=T0*i/6;g+=`<text x="${X(s)}" y="${H-22}" text-anchor="middle" font-size="11" fill="#5d7084">${Math.round(s/60)}</text>`}
+ g+=`<line x1="${m.l}" x2="${W-m.r}" y1="${Y(10)}" y2="${Y(10)}" stroke="#b3362b" stroke-dasharray="5 4" opacity=".7"/>`;
+  if(j.band){const b=j.band,f=(a)=>b.t.map((x,i)=>`${X(x).toFixed(1)},${Y(a[i]).toFixed(1)}`);g+=`<polygon points="${f(b.hi).filter((_,i)=>i%3==0).join(" ")} ${f(b.lo).filter((_,i)=>i%3==0).reverse().join(" ")}" fill="#1f5fbf" opacity=".13"/>`}
+ const pts=j.series.filter((_,i)=>i%2==0).map(s=>`${X(s.t).toFixed(1)},${Y(s.released_pct).toFixed(1)}`).join(" ");
+ g+=`<polyline points="${pts}" fill="none" stroke="#1f5fbf" stroke-width="2.6" stroke-linejoin="round"/><text x="${W/2}" y="${H-4}" text-anchor="middle" font-size="12" fill="#5d7084">${t("time")}</text><text x="13" y="${m.t+ph/2}" font-size="12" fill="#5d7084" transform="rotate(-90 13 ${m.t+ph/2})" text-anchor="middle">${t("pct")}</text>`;
+  if(OVER.fit)g+=`<polyline points="${OVER.fit.map(s=>`${X(s.t).toFixed(1)},${Y(s.released_pct).toFixed(1)}`).join(" ")}" fill="none" stroke="#16794a" stroke-width="2" stroke-dasharray="6 4"/>`;
+ const dot=(pt,c)=>`<circle cx="${X(pt[0]*60)}" cy="${Y(pt[1])}" r="4.5" ${c}/>`;
+ if(EXP&&!OVER.tr)EXP.t.forEach((x,i)=>g+=dot([x,EXP.v[i]],'fill="#142435"'));
+ if(OVER.tr)OVER.tr.forEach(q=>g+=dot(q,'fill="#142435"'));if(OVER.te)OVER.te.forEach(q=>g+=dot(q,'fill="#fff" stroke="#b3362b" stroke-width="2"'));
+ $("chart").innerHTML=g}
+
+let WS="";try{WS=localStorage.getItem("af_ws")||"";if(!WS){const rb=new Uint8Array(16);crypto.getRandomValues(rb);WS=[...rb].map(b=>b.toString(16).padStart(2,"0")).join("");localStorage.setItem("af_ws",WS)}}catch(e){WS="anon"+Date.now()+"0000000000"}
+const DB={projects:[],forms:[],runs:[],datasets:[],cur:null},CT={"Content-Type":"application/json","X-Workspace":WS};
+const getSaved=()=>DB.forms.map(f=>({id:f.id,name:f.name,body:f.body.request,run_id:f.body.run_id,when:f.created,proj:DB.cur}));
+const esc=x=>String(x).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function applyBody(b){comps=JSON.parse(JSON.stringify(b.components));stages=JSON.parse(JSON.stringify(b.stages));kBase=b.k_base;$("poly").value=b.polymer||"";$("cm").value=b.coating_mass_mg;$("ct").value=b.coating_thickness_mm;renderComps();renderStages()}
+$("savebtn").onclick=async()=>{if(!last)return;const n=prompt(t("save"),"Formulation "+last.run_id);if(!n)return;await J("POST",`/api/projects/${DB.cur}/formulations`,{name:n.slice(0,80),body:{request:lastReq,run_id:last.run_id}});await loadDB(DB.cur);renderSaved()};
+$("dl").onclick=()=>{if(!last)return;const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(last,null,1)],{type:"application/json"}));a.download=`astraflux_run_${last.run_id}.json`;a.click()};
+$("csv").onchange=async e=>{const f=e.target.files[0];if(!f)return;const rows=(await f.text()).trim().split(/\r?\n/).map(l=>l.split(/[,;\t]/).map(parseFloat)).filter(r=>r.length>=2&&isFinite(r[0])&&isFinite(r[1]));
+ EXP=rows.length?{t:rows.map(r=>r[0]),v:rows.map(r=>r[1])}:null;OVER.tr=OVER.te=OVER.fit=null;$("expinfo").textContent=EXP?`${EXP.t.length} ${t("pts")}`:"CSV?";$("cmpres").innerHTML="";if(last)chart(last)};
+const rn=(...c)=>"<tr>"+c.map(x=>`<td>${x}</td>`).join("")+"</tr>",row=(a,b,c)=>`<tr><td>${a}</td><td>${b}</td><td>${c??""}</td></tr>`;
+$("cmp").onclick=async()=>{if(!lastReq||!EXP){$("expinfo").textContent=t("nodata");return}
+ try{const r=await fetch("/api/compare",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({request:lastReq,data:{times_min:EXP.t,release_pct:EXP.v,source:$("src").value,conditions:$("cond").value}})});const j=await r.json();
+  if(!r.ok){$("cmpres").innerHTML=`<p class="small" style="color:var(--bad)">${esc(typeof j.detail=="string"?j.detail:JSON.stringify(j.detail))}</p>`;return}
+  const c=j.calibration,n=j.nominal_model_vs_data;OVER.fit=c.fitted_series;OVER.tr=c.train_idx.map(i=>[EXP.t[i],EXP.v[i]]);OVER.te=c.test_idx.map(i=>[EXP.t[i],EXP.v[i]]);chart(last);
+  $("cmpres").innerHTML=`<table class="m"><tr><th></th><th>RMSE %</th><th>f2</th></tr>`+row("Nominal model vs all data (n="+n.n+")",n.rmse_pct,n.f2)+row("Calibrated, training points (n="+c.train.n+")",c.train.rmse_pct,c.train.f2)+row("<b>Held-out, nominal (n="+c.test_uncalibrated.n+")</b>",c.test_uncalibrated.rmse_pct,c.test_uncalibrated.f2)+row("<b>Held-out, calibrated (n="+c.test_calibrated.n+")</b>",c.test_calibrated.rmse_pct,c.test_calibrated.f2)+`</table><p class="small">k_base: ${c.k_nominal} → ${c.k_fit.toPrecision(3)}${c.identifiable?"":" ⚠ not identifiable from training data"}<br>${j.notes.map(esc).join("<br>")}<br>Source: ${esc(j.provenance.source||"—")} · ${esc(j.provenance.conditions||"—")}</p>`}catch(e){$("cmpres").innerHTML=`<p class="small">${t("net")}</p>`}};
+async function loadModel(){try{const m=await (await fetch("/api/model")).json();const L2=a=>"<ul>"+a.map(x=>`<li><code>${esc(x)}</code></li>`).join("")+"</ul>";
+ $("model").innerHTML=`<details open><summary>${t("eq")} (v${m.version})</summary>${L2(m.equations)}</details><details><summary>${t("units")}</summary>${L2(Object.entries(m.units).map(([k,v])=>k+": "+v))}</details><details><summary>${t("asm")}</summary>${L2(m.assumptions)}<p>${esc(m.constants.status)}</p></details><details><summary>${t("lim")}</summary>${L2(m.validity_domain)}</details><details><summary>${t("planned")}</summary>${L2(m.not_implemented)}</details>`}catch(e){$("model").textContent=t("net")}}
+
+const jget=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},jset=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+const projects=()=>DB.projects,curP=()=>DB.cur;
+const myRuns=()=>DB.runs.map(r=>({id:r.id,run_id:r.run_id,when:r.created,req:r.request,sum:r.summary,mv:r.model_version,series:r.series}));
+const J=(m,u,b)=>fetch(u,{method:m,headers:CT,body:b?JSON.stringify(b):undefined});
+async function loadDB(keep){let P=await (await fetch("/api/projects",{headers:CT})).json();if(!P.length){await J("POST","/api/projects",{name:"Default project"});P=await (await fetch("/api/projects",{headers:CT})).json()}
+ let c=keep;try{c=c||localStorage.getItem("af_cur")}catch(e){}DB.projects=P;DB.cur=(P.find(p=>p.id==c)||P[0]).id;try{localStorage.setItem("af_cur",DB.cur)}catch(e){}
+ [DB.forms,DB.runs,DB.datasets]=await Promise.all(["formulations","runs","datasets"].map(k=>fetch(`/api/projects/${DB.cur}/${k}`,{headers:CT}).then(x=>x.json())))}
+async function addRun(j){await J("POST",`/api/projects/${DB.cur}/runs`,{run_id:j.run_id,request:j.request,summary:j.summary,model_version:j.model_version,data_version:j.data_version,series:j.series.filter((_,i)=>i%6==0).map(q=>({t:q.t,released_pct:q.released_pct}))});DB.runs=await (await fetch(`/api/projects/${DB.cur}/runs`,{headers:CT})).json()}
+function renderSaved(){const a=getSaved();$("savedlist").innerHTML=a.length?"":`<span class="small">${t("nosaved")}</span>`;
+ a.forEach(x=>{const d=document.createElement("div");d.className="sv";d.innerHTML=`<span>${esc(x.name)}<br><code>${esc(x.run_id)}</code></span><span><button type="button">${t("rerun")}</button> <button type="button" class="x">${t("del")}</button></span>`;const [r,del]=d.querySelectorAll("button");
+  r.onclick=()=>{applyBody(x.body);expectId=x.run_id;run()};del.onclick=async()=>{if(!confirm(t("del")+"?"))return;await J("DELETE","/api/formulations/"+x.id);await loadDB(DB.cur);renderSaved()};$("savedlist").appendChild(d)});
+ const o=a.map((x,i)=>`<option value="${i}">${esc(x.name)}</option>`).join("");$("va").innerHTML=o;$("vb").innerHTML=o;$("vb").selectedIndex=Math.min(1,a.length-1)}
+$("vcmp").onclick=()=>{const a=getSaved().filter(x=>true),A=a[$("va").value],B=a[$("vb").value];if(!A||!B)return;const f=b=>{const o={};b.components.forEach(c=>o["mass "+c.name]=c.mass_mg);o.polymer=b.polymer;o["coating mg"]=b.coating_mass_mg;o["thickness mm"]=b.coating_thickness_mm;b.stages.forEach((q,i)=>{o["stage"+(i+1)+" pH"]=q.pH;o["stage"+(i+1)+" s"]=q.duration_s});o.k_base=b.k_base;return o};
+ const fa=f(A.body),fb=f(B.body),keys=[...new Set([...Object.keys(fa),...Object.keys(fb)])].filter(k=>fa[k]!==fb[k]);$("vres").innerHTML=keys.length?`<table class="m"><tr><th></th><th>${esc(A.name)}</th><th>${esc(B.name)}</th></tr>${keys.map(k=>row(k,fa[k]??"—",fb[k]??"—")).join("")}</table>`:"Identical inputs."};
+const BADGE={ok:"Implemented",part:"Partial",plan:"Planned / not implemented"};
+function renderDash(){const P=projects(),c=curP(),runs=myRuns(),nf=getSaved().filter(x=>(x.proj||P[0].id)==c).length;
+ const mods=[["Research Dashboard","ok","Projects, formulations and runs stored in this browser (no accounts)"],["Formulation Workspace","ok","Editable formulation, saved versions, input diff"],["Simulation Studio","ok","Real backend /api/simulate; loading, success and error states"],["Results & Model Analysis","part","Real curves, band, run comparison; no experimental fit beyond k_base"],["Experimental Data","part","CSV compare, f2/RMSE, held-out check; needs real data"],["AI & PINN","plan","No trained model connected"],["Optimization","part","Scenario sweep implemented; optimiser planned"],["Reports","part","HTML/JSON/PDF from real runs; no multi-run template"]];
+ $("dash").innerHTML=`<section><h2>Research dashboard <span class="bd part">Prototype · not experimentally validated</span></h2><div class="body"><div class="bar"><select id="psel" aria-label="project">${P.map(p=>`<option value="${p.id}" ${p.id==c?"selected":""}>${esc(p.name)}</option>`).join("")}</select><button type="button" id="pnew">+ New project</button><button type="button" id="pren">Rename</button><button type="button" id="parc">Archive</button><button type="button" id="pdel" style="color:var(--bad)">Delete</button><button type="button" id="bkp">Download backup</button><label class="small" style="display:inline-flex;gap:6px;align-items:center;margin:0">Restore <input id="rst" type="file" accept=".json" style="width:auto"></label><button type="button" id="popen">${t("n_studio")}</button></div>
+ <div class="cards"><div class="kpi"><b>${nf}</b><span>Saved formulations</span></div><div class="kpi"><b>${runs.length}</b><span>Saved runs</span></div><div class="kpi"><b>${EXP?EXP.t.length:0}</b><span>Experimental points loaded</span></div><div class="kpi"><b id="hl">…</b><span>Backend</span></div></div></div></section>
+ <section><h2>Modules</h2><div class="body"><table class="m">${mods.map(m=>row(m[0],`<span class="bd ${m[1]}">${BADGE[m[1]]}</span>`,m[2])).join("")}</table></div></section>
+ <section><h2>Recent runs</h2><div class="body">${runs.length?`<table class="m"><tr><th>Run ID</th><th>When (UTC)</th><th>Acid % / Final %</th></tr>${runs.slice(0,6).map(r=>row("<code>"+r.run_id+"</code>",r.when,(r.sum.acid_stage_release_pct??"—")+" / "+r.sum.final_released_pct)).join("")}</table>`:'<span class="small">No runs yet.</span>'}</div></section>`;
+ $("psel").onchange=async e=>{await loadDB(e.target.value);renderDash();renderSaved();renderDatasets()};$("popen").onclick=()=>showTab("studio");
+ const re_=async()=>{renderDash();renderSaved();renderDatasets()};
+ $("pnew").onclick=async()=>{const n=prompt("Project name");if(!n)return;const r=await (await J("POST","/api/projects",{name:n.slice(0,80)})).json();await loadDB(r.id);re_()};
+ $("pren").onclick=async()=>{const n=prompt("New name",projects().find(p=>p.id==c).name);if(!n)return;await J("PATCH","/api/projects/"+c,{name:n.slice(0,80)});await loadDB(c);re_()};
+ $("parc").onclick=async()=>{if(!confirm("Archive this project? (it can be restored from a backup or via the API)"))return;await J("PATCH","/api/projects/"+c,{archived:true});await loadDB();re_()};
+ $("pdel").onclick=async()=>{if(!confirm("DELETE this project with all its formulations, runs and datasets? This cannot be undone. Download a backup first."))return;await J("DELETE","/api/projects/"+c+"?confirm=true");await loadDB();re_()};
+ $("bkp").onclick=async()=>dlf("astraflux_backup.json",JSON.stringify(await (await fetch("/api/backup",{headers:CT})).json(),null,1),"application/json");
+ $("rst").onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const r=await J("POST","/api/restore",JSON.parse(await f.text()));const j=await r.json();alert(r.ok?"Restored: "+JSON.stringify(j.restored):"Restore failed: "+(j.detail||r.status));await loadDB(c);re_()}catch(x){alert("Invalid backup file")}};
+ fetch("/api/health").then(r=>r.json()).then(h=>$("hl").textContent="v"+h.version).catch(()=>$("hl").textContent="offline")}
+const COL=["#1f5fbf","#c27a0a","#16794a","#b3362b","#7a4fbf","#5d7084"];
+function curves(list){const W=680,H=300,m={l:46,r:14,t:14,b:56},pw=W-m.l-m.r,ph=H-m.t-m.b,T0=Math.max(...list.map(c=>c.pts.at(-1).t)),X=x=>m.l+pw*x/T0,Y=p=>m.t+ph*(1-p/100);let g="";
+ for(let p=0;p<=100;p+=25)g+=`<line x1="${m.l}" x2="${W-m.r}" y1="${Y(p)}" y2="${Y(p)}" stroke="#d9e1e9"/><text x="${m.l-7}" y="${Y(p)+4}" text-anchor="end" font-size="11" fill="#5d7084">${p}</text>`;
+ for(let i=0;i<=6;i++)g+=`<text x="${X(T0*i/6)}" y="${H-38}" text-anchor="middle" font-size="11" fill="#5d7084">${Math.round(T0*i/360)}</text>`;
+ list.forEach((c,i)=>{g+=`<polyline fill="none" stroke="${COL[i%6]}" stroke-width="2.3" points="${c.pts.map(q=>X(q.t).toFixed(1)+","+Y(q.released_pct).toFixed(1)).join(" ")}"/><rect x="${m.l+i*150}" y="${H-24}" width="10" height="10" fill="${COL[i%6]}"/><text x="${m.l+14+i*150}" y="${H-15}" font-size="11" fill="#142435">${esc(c.name)}</text>`});
+ return `<svg class="ch" viewBox="0 0 ${W} ${H}">${g}<text x="${W/2}" y="${H-44}" text-anchor="middle" font-size="11" fill="#5d7084">min</text></svg>`}
+function renderAnalysis(){const r=myRuns(),o=r.map((x,i)=>`<option value="${i}">${x.run_id} · ${x.when.slice(5,16)}</option>`).join("");$("ra").innerHTML=o;$("rb").innerHTML=o;$("rb").selectedIndex=Math.min(1,r.length-1);$("runcmp").innerHTML=r.length?"":'<span class="small">Run simulations first.</span>'}
+$("cmpruns").onclick=()=>{const r=myRuns(),A=r[$("ra").value],B=r[$("rb").value];if(!A||!B)return;const q=x=>[x.req.polymer||"none",x.req.coating_mass_mg,x.req.coating_thickness_mm,x.req.k_base];
+ $("runcmp").innerHTML=curves([{name:"A "+A.run_id,pts:A.series},{name:"B "+B.run_id,pts:B.series}])+`<table class="m"><tr><th></th><th>A</th><th>B</th></tr>${row("Polymer",...q(A).slice(0,1).concat(q(B).slice(0,1)))}${row("Coating mg",q(A)[1],q(B)[1])}${row("Thickness mm",q(A)[2],q(B)[2])}${row("k_base",q(A)[3],q(B)[3])}${row("Acid-stage %",A.sum.acid_stage_release_pct??"—",B.sum.acid_stage_release_pct??"—")}${row("Time to 85 %",mn(A.sum.t85_s),mn(B.sum.t85_s))}${row("Final %",A.sum.final_released_pct,B.sum.final_released_pct)}${row("Model version",A.mv,B.mv)}</table>`};
+$("swrun").onclick=async()=>{const vals=$("sw").value.split(/[,;\s]+/).map(parseFloat).filter(x=>x>0&&x<=2).slice(0,6);if(!vals.length||!comps.length){$("swres").textContent="Enter thickness values and a formulation.";return}
+ const out=[];$("swres").textContent=t("running");try{for(const v of vals){const b={components:comps,polymer:$("poly").value||null,coating_mass_mg:+$("cm").value||0,coating_thickness_mm:v,stages:stages.map(s=>({...s,name:s.name||"stage"})),k_base:kBase??CAT.demo.k_base,dt_s:2,include_band:false};
+  const r=await fetch("/api/simulate",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(b)}),j=await r.json();if(!r.ok)throw new Error(typeof j.detail=="string"?j.detail:"validation error");out.push([v,j])}
+  $("swres").innerHTML=curves(out.map(([v,j])=>({name:v+" mm",pts:j.series})))+`<table class="m"><tr><th>mm</th><th>Acid %</th><th>Screen</th><th>t85</th><th>Final %</th><th>Run ID</th></tr>${out.map(([v,j])=>rn(v,j.summary.acid_stage_release_pct??"—",(j.summary.gastric_resistant===undefined?"—":j.summary.gastric_resistant?"10 % or less":"over 10 %"),mn(j.summary.t85_s),j.summary.final_released_pct,"<code>"+j.run_id+"</code>")).join("")}</table>`}catch(e){$("swres").textContent=t("fail")+e.message}};
+async function buildReport(){if(!last){$("rep").innerHTML=`<p class="small">${t("nodata")}</p>`;return}const j=last,r=j.request,S=j.summary;let m={assumptions:[],validity_domain:[]};try{m=await (await fetch("/api/model")).json()}catch(e){}
+ const ul=a=>"<ul>"+a.map(x=>`<li>${esc(x)}</li>`).join("")+"</ul>";
+ $("rep").innerHTML=`<h2 style="margin:0">AstraFlux AI — Simulation report</h2><p class="small">Run ${j.run_id} · ${j.created_utc} UTC · model ${j.model_version} · data ${j.data_version} · project: ${esc(projects().find(p=>p.id==curP()).name)}</p>
+ <h3>Formulation</h3><table class="m"><tr><th>Component</th><th>mg</th></tr>${r.components.map(c=>row(esc(c.name),c.mass_mg)).join("")}${row("Polymer",esc(r.polymer||"none"))}${row("Coating mass (mg) / thickness (mm)",r.coating_mass_mg+" / "+r.coating_thickness_mm)}</table>
+ <h3>Simulation inputs</h3><table class="m"><tr><th>Stage</th><th>pH</th><th>s</th><th>Agitation</th></tr>${r.stages.map(q=>rn(esc(q.name),q.pH,q.duration_s,q.agitation)).join("")}</table><p class="small">k_base ${r.k_base} · dt ${r.dt_s} s</p>
+ <h3>Results</h3><table class="m">${row("Acid-stage release %",S.acid_stage_release_pct??"n/a")}${row("Final release %",S.final_released_pct)}${row("Time to 50 % / 85 %",mn(S.t50_s)+" / "+mn(S.t85_s))}${row("Mass-balance error (mg)",S.mass_balance_error_mg)}</table>
+ <h3>Release profile</h3>${$("chart").outerHTML}<p class="small">${j.band?esc(j.band.definition):""}</p>${EXP&&OVER.te?"<h3>Comparison with experimental data</h3>"+$("cmpres").innerHTML:""}
+ <h3>Model assumptions</h3>${ul(m.assumptions)}<h3>Validity limits</h3>${ul(m.validity_domain)}<h3>Warnings</h3>${ul([j.disclaimer,"Constants are uncalibrated; results are not experimentally validated.","Not clinically validated or regulator-approved."])}`}
+const dlf=(n,txt,type)=>{const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([txt],{type}));a.download=n;a.click()};
+$("rprint").onclick=()=>window.print();$("rjson").onclick=()=>last&&dlf(`astraflux_run_${last.run_id}.json`,JSON.stringify(last,null,1),"application/json");
+$("rhtml").onclick=()=>last&&dlf(`astraflux_report_${last.run_id}.html`,'<!doctype html><meta charset="utf-8"><title>AstraFlux report</title><style>body{font:14px Arial;max-width:900px;margin:24px auto}table{border-collapse:collapse;width:100%}td,th{border:1px solid #ccc;padding:4px 8px;text-align:left}svg{width:100%;height:auto}.small{color:#555;font-size:12px}</style>'+$("rep").innerHTML,"text/html");
+function showTab(n){["dash","studio","data","analysis","ai","opt","rep"].forEach(x=>$("pg-"+x).classList.toggle("on",x==n));document.querySelectorAll("#nav button").forEach(b=>b.setAttribute("aria-current",b.dataset.tab==n));if(n=="dash")renderDash();if(n=="analysis")renderAnalysis();if(n=="rep")buildReport();window.scrollTo(0,0)}
+$("nav").innerHTML=["dash","studio","data","analysis","ai","opt","rep"].map(x=>`<button type="button" data-tab="${x}" data-i="n_${x}"></button>`).join("");$("nav").querySelectorAll("button").forEach(b=>b.onclick=()=>showTab(b.dataset.tab));
+
+const errs_=j=>`<p class="small" style="color:var(--bad)">${esc(typeof j.detail=="string"?j.detail:JSON.stringify(j.detail))}</p>`;
+let PREV=null;
+$("dsfile").onchange=async e=>{const f=e.target.files[0];if(!f)return;const txt=await f.text(),r=await J("POST","/api/datasets/preview",{csv_text:txt}),j=await r.json();if(!r.ok){PREV=null;$("dsmap").innerHTML=errs_(j);return}PREV=txt;
+ const o=j.headers.map(h=>`<option>${esc(h)}</option>`).join(""),sel=(id,l,c)=>`<div><label>${l}</label><select id="${id}">${c}</select></div>`;
+ $("dsmap").innerHTML=`<div style="overflow:auto"><table class="m"><tr>${j.headers.map(h=>`<th>${esc(h)}</th>`).join("")}</tr>${j.rows.slice(0,5).map(r=>"<tr>"+r.map(x=>`<td>${esc(x)}</td>`).join("")+"</tr>").join("")}</table></div><p class="small">${j.n_rows} rows</p>
+ ${sel("mt","Time column",o)}${sel("mr","Release column",o)}${sel("mtu","Time unit",'<option value="min">minutes</option><option value="h">hours</option><option value="s">seconds</option>')}${sel("mru","Release unit",'<option value="percent">percent (0-100)</option><option value="fraction">fraction (0-1)</option>')}${sel("mk","Use as",'<option value="calibration">Calibration</option><option value="validation">Independent validation</option>')}
+ <label>Dataset name</label><input id="mn" value="${esc(f.name.replace(/\.[^.]+$/,""))}" maxlength="80"><label>Source / provenance</label><input id="ms" maxlength="200"><label>Experimental conditions</label><input id="mc" maxlength="400"><div class="bar"><button type="button" id="dssave">Save dataset</button></div><div id="dsmsg"></div>`;
+ $("mr").selectedIndex=Math.min(1,j.headers.length-1);
+ $("dssave").onclick=async()=>{const r=await J("POST",`/api/projects/${DB.cur}/datasets`,{name:$("mn").value||"dataset",kind:$("mk").value,csv_text:PREV,time_col:$("mt").value,release_col:$("mr").value,time_unit:$("mtu").value,release_unit:$("mru").value,source:$("ms").value,conditions:$("mc").value}),j=await r.json();
+  if(!r.ok){$("dsmsg").innerHTML=errs_(j);return}$("dsmsg").innerHTML=`<p class="small">Saved: ${j.n_points} points. ${j.warnings.map(esc).join(" ")}</p>`;await loadDB(DB.cur);renderDatasets()}};
+function renderDatasets(){const d=DB.datasets;$("dslist").innerHTML=d.length?`<table class="m"><tr><th>Name</th><th>Use</th><th>Points</th><th></th></tr>${d.map(x=>`<tr><td>${esc(x.name)}<br><span class="small">${esc(x.source||"no source")}</span></td><td>${x.kind}</td><td>${x.n_points}</td><td><button type="button" class="x" data-id="${x.id}">${t("del")}</button></td></tr>`).join("")}</table>`:'<p class="small">No datasets yet.</p>';
+ $("dslist").querySelectorAll("button").forEach(b=>b.onclick=async()=>{if(!confirm(t("del")+"?"))return;await J("DELETE","/api/datasets/"+b.dataset.id);await loadDB(DB.cur);renderDatasets()});
+ const o=d.map(x=>`<option value="${x.id}">${esc(x.name)} (${x.kind})</option>`).join("");$("fitcal").innerHTML=o;$("fitval").innerHTML='<option value="">— no validation dataset —</option>'+o}
+$("fitrun").onclick=async()=>{const ms=[...document.querySelectorAll(".fm:checked")].map(x=>x.value);if(!$("fitcal").value||!ms.length){$("fitres").innerHTML=errs_({detail:"Select a calibration dataset and at least one model."});return}
+ const r=await J("POST","/api/fit",{dataset_id:$("fitcal").value,models:ms,validation_dataset_id:$("fitval").value||null}),j=await r.json();if(!r.ok){$("fitres").innerHTML=errs_(j);return}
+ const f4=x=>x==null?"—":Number(x).toPrecision(4);
+ $("fitres").innerHTML=`<table class="m"><tr><th>Model</th><th>Parameters (95 % CI)</th><th>n</th><th>RMSE %</th><th>R²</th><th>AICc</th><th>Validation RMSE / R²</th></tr>${j.results.map(x=>rn(`<b>${esc(x.name)}</b><br><code>${esc(x.equation)}</code>`,x.params.map(p=>`${p.name} = ${f4(p.value)} ${esc(p.unit)}${p.ci95?` [${f4(p.ci95[0])}, ${f4(p.ci95[1])}]`:""}`).join("<br>"),x.n_used+(x.n_excluded?` (+${x.n_excluded} excl.)`:""),x.fit.rmse_pct,x.fit.r2??"—",x.fit.aicc??"—",x.validation?`${x.validation.rmse_pct} / ${x.validation.r2??"—"}`:"not provided")).join("")}</table>
+ ${j.results.map(x=>x.warnings.length?`<p class="small" style="color:var(--amber)">${esc(x.name)}: ${x.warnings.map(esc).join(" ")}</p>`:"").join("")}${j.errors.map(e=>`<p class="small" style="color:var(--bad)">${esc(e)}</p>`).join("")}
+ <p class="small">Residuals (%): ${j.results.map(x=>esc(x.name)+": "+x.residuals.slice(0,12).join(", ")).join(" | ")}</p><p class="small">${j.notes.map(esc).join("<br>")}</p>`};
+document.querySelectorAll(".seg button").forEach(b=>b.onclick=()=>setLang(b.dataset.lang,true));
+$("addbtn").onclick=()=>{const n=$("addsel").value;if(comps.length<12&&!comps.find(c=>c.name==n))comps.push({name:n,mass_mg:10});renderComps()};
+$("addstage").onclick=()=>{if(stages.length<6){stages.push({name:"…",pH:7,duration_s:3600,agitation:1});renderStages()}};
+$("run").onclick=run;$("demo").onclick=loadDemo;$("print").onclick=()=>window.print();
+(async()=>{let l="en";try{l=localStorage.getItem("af_lang")||""}catch(e){}if(!LS.includes(l)){const n=(navigator.language||"en").slice(0,2);l=LS.includes(n)?n:"en"}
+ setLang(l,false);try{CAT=await (await fetch("/api/catalog")).json();await loadDB();fillAdd();fillPoly();loadDemo();setStatus("idle");renderSaved();renderDatasets();loadModel()}catch(e){setStatus("err",t("net"))}})();
+</script>
+</body>
+</html>
