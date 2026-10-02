@@ -18,7 +18,7 @@ with a formulation builder, a polymer library (50 polymers) and a heuristic stor
 python -m venv .venv && . .venv/bin/activate        # Windows: .venv\Scripts\activate
 pip install -r requirements.txt -r requirements-dev.txt
 uvicorn astraflux.api:app --reload                   # open http://localhost:7860
-pytest                                               # 41 tests
+pytest                                               # 56 tests
 python postdeploy_check.py http://localhost:7860     # smoke test
 ```
 ## Docker
@@ -41,3 +41,6 @@ download a backup first and use **Restore** afterwards. Deleting a project asks 
 ## Using the API from another site (e.g. Lovable)
 Set the Space variables `ALLOWED_ORIGIN_REGEX=https://.*\.(lovable\.app|lovableproject\.com)` (or `ALLOWED_ORIGINS`). See `docs/LOVABLE_API_CONTRACT.md`
 and paste `docs/LOVABLE_PROMPT.md` into Lovable. Stored-work endpoints need an `X-Workspace` header (random key per visitor; isolation, not authentication).
+
+## Batch calculator
+Tab **Batch Calculator**: scale a per-unit recipe to a batch size with handling loss and assay/LOD correction, then print a draft sheet (PDF) or export CSV/JSON. See `docs/BATCH_MODULE.md` (draft aid, not a validated GMP system).

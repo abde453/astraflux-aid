@@ -11,6 +11,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 from . import materials as M, analysis as A
 from .store_api import router as store_router
+from .batch_api import router as batch_router
 from .engine import Core, Coating, Environment, Polymer, SimulationError, simulate, MODEL_INFO, MODEL_VERSION
 
 log = logging.getLogger("astraflux")
@@ -24,6 +25,7 @@ app.add_middleware(CORSMiddleware, allow_origins=[o.strip() for o in os.environ.
 
 
 app.include_router(store_router)
+app.include_router(batch_router)
 
 
 class Component(BaseModel):
