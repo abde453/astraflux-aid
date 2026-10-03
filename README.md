@@ -1,13 +1,3 @@
----
-title: AstraFlux AI
-emoji: 💊
-colorFrom: blue
-colorTo: indigo
-sdk: docker
-app_port: 7860
-pinned: false
----
-
 # AstraFlux AI — Drug Release Simulator (demo prototype v0.2)
 
 Web prototype that simulates drug release from coated tablets across GI stages (pH, time, agitation),

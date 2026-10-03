@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AstraFlux AI — Batch Calculator</title>
+<style>
+:root{--navy:#0c1f33;--navy2:#16324d;--ink:#142435;--mute:#5d7084;--bg:#eef2f6;--card:#fff;--line:#d9e1e9;--blue:#1f5fbf;--blue2:#e8f0fc;--amber:#c27a0a;--ok:#16794a;--bad:#b3362b;--f:"IBM Plex Sans","IBM Plex Sans Arabic","Segoe UI",Tahoma,system-ui,sans-serif}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:14px/1.55 var(--f)}
+header{background:linear-gradient(100deg,var(--navy),var(--navy2));color:#fff;padding:0 clamp(16px,4vw,40px)}
+.top{max-width:1320px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px}.brand svg{width:34px;height:34px}
+.brand b{font-size:18px;font-weight:600;letter-spacing:.2px}.brand span{display:block;font-size:12px;color:#9db4cc;margin-top:-2px}
+.seg{display:flex;border:1px solid #3a5876;border-radius:8px;overflow:hidden}
+.seg button{background:transparent;color:#c9d8e8;border:0;padding:7px 14px;font:500 13px var(--f);cursor:pointer}
+.seg button[aria-pressed=true]{background:#fff;color:var(--navy)}
+.seg button:focus-visible{outline:2px solid #7fb0f0;outline-offset:-2px}
+.hero{max-width:1320px;margin:auto;padding:22px 0 26px}.hero h1{font-size:22px;font-weight:500;margin:0;max-width:760px;line-height:1.35}
+.hero p{margin:6px 0 0;color:#9db4cc;font-size:13px}
+main{display:grid;grid-template-columns:minmax(320px,430px) 1fr;gap:22px;padding:22px clamp(16px,4vw,40px) 40px;max-width:1400px;margin:auto}
+@media(max-width:920px){main{grid-template-columns:1fr}}
+section{background:var(--card);border:1px solid var(--line);border-radius:6px;margin-bottom:14px}
+section>h2{margin:0;padding:11px 16px;font-size:13px;font-weight:600;border-bottom:1px solid var(--line);background:#f7f9fb;border-radius:6px 6px 0 0}
+.body{padding:14px 16px}
+label{display:block;font-size:12px;color:var(--mute);margin:8px 0 3px;font-weight:500}
+input,select,button{font:inherit;color:inherit}
+input,select{width:100%;padding:7px 9px;border:1px solid #c5d0db;border-radius:4px;background:#fff;min-width:0}
+input:focus-visible,select:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
+.row{display:grid;grid-template-columns:1fr 92px 30px;gap:6px;margin-bottom:6px;align-items:center}
+.row4{display:grid;grid-template-columns:2.4fr .8fr 1fr .8fr 26px;gap:6px;margin-bottom:6px}
+.hd{display:grid;grid-template-columns:2.4fr .8fr 1fr .8fr 26px;gap:6px;font-size:11px;color:var(--mute);margin-bottom:3px}
+button{border:1px solid #c5d0db;background:#fff;padding:7px 12px;border-radius:4px;cursor:pointer;font-weight:500}
+button:hover{background:#f3f6f9}button.x{padding:3px;color:var(--bad);border-color:transparent}
+button.primary{background:var(--blue);color:#fff;border-color:var(--blue);width:100%;padding:11px;font-size:15px;font-weight:600}
+button.primary:hover{background:#1a52a6}button[disabled]{opacity:.6;cursor:wait}
+.bar{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.bar select{flex:1}
+#status{display:flex;gap:10px;align-items:center;padding:10px 14px;border-radius:6px;border:1px solid var(--line);border-inline-start:4px solid var(--mute);background:#fff;margin-bottom:14px;font-weight:500}
+#status.run{border-inline-start-color:var(--blue)}#status.ok{border-inline-start-color:var(--ok)}#status.err{border-inline-start-color:var(--bad);color:var(--bad)}
+.verdict{margin:0 0 14px;padding:11px 14px;border-radius:4px;font-weight:600}
+.verdict.pass{background:#e6f4ec;color:var(--ok);border:1px solid #bfe0cc}.verdict.fail{background:#fbebe9;color:var(--bad);border:1px solid #efc3be}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));border:1px solid var(--line);border-radius:4px;margin-bottom:16px}
+.kpi{padding:12px 14px;border-inline-end:1px solid var(--line)}.kpi:last-child{border:0}
+.kpi b{display:block;font-size:26px;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:-.3px}.kpi span{font-size:12px;color:var(--mute)}
+svg.ch{width:100%;height:auto;display:block}
+.small{font-size:12px;color:var(--mute)}.warn{font-size:12px;color:var(--mute);border-inline-start:3px solid var(--amber);padding:4px 10px}
+.hl{display:flex;justify-content:space-between;align-items:center;gap:10px}.hl button{padding:4px 10px;font-size:12px}
+table.m{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}table.m td,table.m th{border:1px solid var(--line);padding:5px 8px;text-align:start}table.m th{background:#f7f9fb}
+details{margin-bottom:6px}summary{cursor:pointer;font-weight:600}code{font-size:12px;background:#f3f6f9;padding:1px 4px;direction:ltr;unicode-bidi:embed}
+.sv{display:flex;justify-content:space-between;gap:6px;align-items:center;border-bottom:1px solid var(--line);padding:6px 0}.sv button{padding:3px 8px;font-size:12px}
+.page{display:none}.page.on{display:block}main.page.on{display:grid}.pg{max-width:1400px;margin:auto;padding:22px clamp(16px,4vw,40px)}
+nav{background:#fff;border-bottom:1px solid var(--line);display:flex;overflow-x:auto;padding:0 clamp(16px,4vw,40px)}nav button{border:0;border-bottom:3px solid transparent;border-radius:0;background:none;padding:12px 16px;white-space:nowrap}nav button[aria-current=true]{border-bottom-color:var(--blue);color:var(--blue);font-weight:600}
+.bd{font-size:11px;font-weight:600;padding:2px 8px;border-radius:10px;margin-inline-start:6px}.bd.ok{background:#e6f4ec;color:var(--ok)}.bd.part{background:#fdf1dc;color:var(--amber)}.bd.plan{background:#eceff3;color:var(--mute)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:12px 0}.cards .kpi{background:#fff;border:1px solid var(--line);border-radius:6px}
+@media print{#bres.stale #bsheet,#bstale{display:none}header{display:none}#pg-batch>section:first-of-type{display:none}.noprint{display:none}}
+#bres.stale #bsheet{opacity:.35}
+@media print{nav,header .seg,.left,#status,.hl button{display:none}main{display:block}}
+</style></head><body>
+<header><div class="top"><div class="brand"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="1" y="1" width="38" height="38" rx="9" fill="#1f5fbf"/><path d="M8 27c6 0 6-14 12-14s6 14 12 14" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/><circle cx="20" cy="13" r="2.6" fill="#fff"/></svg><div><b>AstraFlux AI</b><span>Batch Calculator</span></div></div></div><div class="hero"><h1>Batch formulation &amp; scaling</h1><p>Draft calculation aid — not a validated GMP/BPR system</p></div></header>
+<div id="pages"><div id="pg-batch" class="page pg on">
+<section><h2>Batch formulation &amp; scaling <span class="bd part">Draft calculation aid</span></h2><div class="body">
+ <p class="small">Scales a per-unit recipe to a batch size, adds the handling loss, corrects for raw-material assay and LOD, and keeps the batch total constant through one compensating filler. It is <b>not</b> a validated GMP/BPR system: results must be checked and approved by qualified personnel.</p>
+ <div class="bar"><button type="button" id="bex">Load example (Paracetamol 500 mg)</button><button type="button" id="bclear">Clear form</button><select id="bsaved" aria-label="saved recipes"></select><button type="button" id="bsave">Save recipe (this browser)</button></div>
+ <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px"><div><label>Product</label><input id="bp" maxlength="120"></div><div><label>Requested units</label><input id="bu" type="number" min="1" step="1"></div><div><label>Unit label</label><input id="bl" maxlength="20" value="tablets"></div><div><label>Handling loss %</label><input id="bs" type="number" min="0" max="20" step="0.1"></div><div><label>Assay basis</label><select id="bb"><option value="dried">Dried basis (apply assay and LOD)</option><option value="as_is">As-is (assay only)</option></select></div></div>
+ <div style="overflow:auto"><table class="m" id="brec"></table></div>
+ <div class="bar"><button type="button" id="badd">Add ingredient</button><button type="button" class="primary" id="bcalc" style="width:auto">Calculate batch</button></div><div id="bmsg"></div></div></section>
+<section id="bres" hidden><h2 class="hl"><span>Batch calculation sheet</span><span class="noprint"><button type="button" id="bprint">Print / PDF</button> <button type="button" id="bcsv">CSV</button> <button type="button" id="bjson">JSON</button></span></h2><div class="body"><p id="bstale" class="small" style="color:var(--bad);font-weight:600" hidden>⚠ Inputs changed after the last calculation. Click “Calculate batch” again before printing or exporting.</p><div id="bsheet"></div></div></section>
+</div>
+</div>
+<script>
+const $=id=>document.getElementById(id),esc=x=>String(x).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const t=k=>k=="net"?"Cannot reach the server":k;
+const rn=(...c)=>"<tr>"+c.map(x=>`<td>${x}</td>`).join("")+"</tr>";
+const errs_=j=>`<p class="small" style="color:var(--bad)">${esc(typeof j.detail=="string"?j.detail:Array.isArray(j.detail)?j.detail.map(x=>x.loc.slice(1).join(".")+": "+x.msg).join("; "):JSON.stringify(j.detail))}</p>`;
+const dlf=(n,txt,type)=>{const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([txt],{type}));a.download=n;a.click()};
+const ROLES=["API","Diluent / Filler","Disintegrant","Binder","Lubricant","Glidant","Coating","Other"],BKEY="af_batch";
+let BR={product:"",requested_units:1000,unit_label:"tablets",loss_pct:0,assay_basis:"dried",lines:[]},BOUT=null;
+const bget=()=>{try{return JSON.parse(localStorage.getItem(BKEY)||"{}")}catch(e){return{}}},bput=o=>{try{localStorage.setItem(BKEY,JSON.stringify(o))}catch(e){}};
+function bRender(){$("bp").value=BR.product;$("bu").value=BR.requested_units===0?"":BR.requested_units;$("bl").value=BR.unit_label;$("bs").value=BR.loss_pct;$("bb").value=BR.assay_basis;
+ $("brec").innerHTML="<tr><th>Ingredient</th><th>Role</th><th>mg / unit</th><th>Assay %</th><th>LOD %</th><th title='Fills the batch total'>Compensates</th><th></th></tr>";
+ BR.lines.forEach((l,i)=>{const r=document.createElement("tr");r.innerHTML=`<td><input value="${esc(l.name)}" maxlength="80"></td><td><select>${ROLES.map(x=>`<option ${x==l.role?"selected":""}>${x}</option>`).join("")}</select></td><td><input type="number" min="0" step="any" value="${l.mg_per_unit}"></td><td><input type="number" min="0" max="100" step="any" value="${l.assay_pct}"></td><td><input type="number" min="0" max="99.99" step="any" value="${l.lod_pct}"></td><td style="text-align:center"><input type="radio" name="bcomp" ${l.compensates?"checked":""} style="width:auto"></td><td><button type="button" class="x">✕</button></td>`;
+  const q=r.querySelectorAll("input,select");q[0].oninput=e=>l.name=e.target.value;q[1].onchange=e=>l.role=e.target.value;q[2].oninput=e=>l.mg_per_unit=e.target.value===""?"":+e.target.value;q[3].oninput=e=>l.assay_pct=+e.target.value;q[4].oninput=e=>l.lod_pct=+e.target.value;q[5].onchange=()=>BR.lines.forEach((m,j)=>m.compensates=j==i);
+  r.querySelector("button").onclick=()=>{BR.lines.splice(i,1);bRender()};$("brec").appendChild(r)});
+ const sv=bget();$("bsaved").innerHTML='<option value="">— saved recipes —</option>'+Object.keys(sv).map(k=>`<option>${esc(k)}</option>`).join("")}
+const BEMPTY=()=>({product:"",requested_units:"",unit_label:"tablets",loss_pct:0,assay_basis:"dried",lines:[{name:"",role:"API",mg_per_unit:"",assay_pct:100,lod_pct:0,compensates:false}]});
+function bStale(on){$("bres").classList.toggle("stale",on);$("bstale").hidden=!on;["bprint","bcsv","bjson"].forEach(i=>$(i).disabled=on)}
+function bReset(next){BR=next;BOUT=null;$("bres").hidden=true;$("bmsg").innerHTML="";bStale(false);bRender()}
+const bRead=()=>{BR.product=$("bp").value;BR.requested_units=Math.round(+$("bu").value);BR.unit_label=$("bl").value||"units";BR.loss_pct=+$("bs").value||0;BR.assay_basis=$("bb").value};
+$("bex").onclick=async()=>bReset(await (await fetch("/api/batch/example")).json());
+$("bclear").onclick=()=>bReset(BEMPTY());
+document.querySelector("#pg-batch>section").addEventListener("input",()=>{if(BOUT)bStale(true)});document.querySelector("#pg-batch>section").addEventListener("change",()=>{if(BOUT)bStale(true)});
+$("badd").onclick=()=>{BR.lines.push({name:"",role:"Other",mg_per_unit:0,assay_pct:100,lod_pct:0,compensates:false});bRender()};
+$("bsave").onclick=()=>{bRead();const n=prompt("Recipe name",BR.product);if(!n)return;const sv=bget();sv[n.slice(0,60)]=JSON.parse(JSON.stringify(BR));bput(sv);bRender()};
+$("bsaved").onchange=e=>{const r=bget()[e.target.value];if(r){BR=JSON.parse(JSON.stringify(r));bRender()}};
+$("bcalc").onclick=async()=>{bRead();$("bmsg").innerHTML="";try{const r=await fetch("/api/batch/calculate",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(BR)}),j=await r.json();
+ if(!r.ok){$("bres").hidden=true;$("bmsg").innerHTML=errs_(j);return}BOUT=j;bStale(false);bShow(j)}catch(e){$("bmsg").innerHTML=`<p class="small" style="color:var(--bad)">${t("net")}</p>`}};
+const k3=x=>Number(x).toLocaleString("en",{minimumFractionDigits:3,maximumFractionDigits:3});
+function bShow(j){const i=j.inputs;$("bres").hidden=false;
+ $("bsheet").innerHTML=`<p style="margin:0;font-weight:600;font-size:15px">DRAFT calculation sheet — not an approved batch record</p>
+ <table class="m"><tr><th>Product</th><td>${esc(i.product)}</td><th>Batch no.</th><td style="min-width:140px">&nbsp;</td></tr><tr><th>Requested</th><td>${i.requested_units.toLocaleString("en")} ${esc(i.unit_label)}</td><th>Date</th><td>${new Date().toISOString().slice(0,10)}</td></tr><tr><th>Handling loss</th><td>${i.loss_pct} %</td><th>Planned units</th><td>${j.planned_units.toLocaleString("en")}</td></tr><tr><th>Unit mass</th><td>${j.unit_mass_mg} mg</td><th>Calculation ID</th><td><code>${j.calc_id}</code> (engine ${j.engine_version})</td></tr></table>
+ <table class="m"><tr><th>Ingredient</th><th>Role</th><th>Assay %</th><th>LOD %</th><th>Factor</th><th>Theoretical (kg)</th><th>Actual weight (kg)</th><th>Difference (kg)</th></tr>${j.lines.map(l=>rn(esc(l.name)+(l.compensating?" <span class='small'>(compensating)</span>":""),esc(l.role),l.assay_pct,l.lod_pct,l.correction_factor.toFixed(4),k3(l.theoretical_kg),"<b>"+k3(l.actual_kg)+"</b>",(l.difference_kg>0?"+":"")+k3(l.difference_kg))).join("")}${rn("<b>Total</b>","","","","",k3(j.totals.theoretical_kg),"<b>"+k3(j.totals.actual_kg)+"</b>",k3(j.totals.mass_balance_difference_kg))}</table>
+ ${j.warnings.map(w=>`<p class="small" style="color:var(--amber)">⚠ ${esc(w)}</p>`).join("")}<details class="noprint"><summary>Formulas</summary><ul>${j.formulas.map(f=>`<li><code>${esc(f)}</code></li>`).join("")}</ul></details>
+ <table class="m" style="margin-top:18px"><tr><th>Prepared by (name / signature / date)</th><th>Checked by (name / signature / date)</th><th>QA approval (name / signature / date)</th></tr><tr><td style="height:70px"></td><td></td><td></td></tr></table><p class="small">${esc(j.disclaimer)}</p>`}
+$("bprint").onclick=()=>{if(!$("bres").classList.contains("stale"))window.print()};
+$("bjson").onclick=()=>BOUT&&dlf(`astraflux_batch_${BOUT.calc_id}.json`,JSON.stringify(BOUT,null,1),"application/json");
+$("bcsv").onclick=()=>{if(!BOUT)return;const q=v=>'"'+String(v).replace(/"/g,'""')+'"',h=["ingredient","role","assay_pct","lod_pct","correction_factor","theoretical_kg","actual_kg","difference_kg"];
+ dlf(`astraflux_batch_${BOUT.calc_id}.csv`,[h.join(","),...BOUT.lines.map(l=>[l.name,l.role,l.assay_pct,l.lod_pct,l.correction_factor,l.theoretical_kg,l.actual_kg,l.difference_kg].map(q).join(",")),["TOTAL","","","","",BOUT.totals.theoretical_kg,BOUT.totals.actual_kg,BOUT.totals.mass_balance_difference_kg].map(q).join(",")].join("\r\n"),"text/csv")};
+bRender();
+</script></body></html>

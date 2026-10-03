@@ -28,3 +28,14 @@ def example(): return batch.EXAMPLE
 def calculate(r: BatchReq):
     try: return batch.calculate(r.model_dump())
     except batch.BatchError as e: raise HTTPException(422, str(e))
+
+
+def attach(app):
+    """One-line integration for any existing AstraFlux app: adds the batch API and the standalone page at /batch."""
+    from pathlib import Path
+    from fastapi.responses import FileResponse
+    app.include_router(router)
+    page = Path(__file__).parent / "static" / "batch.html"
+
+    @app.get("/batch", include_in_schema=False)
+    def batch_page(): return FileResponse(page)

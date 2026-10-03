@@ -54,7 +54,8 @@ details{margin-bottom:6px}summary{cursor:pointer;font-weight:600}code{font-size:
 nav{background:#fff;border-bottom:1px solid var(--line);display:flex;overflow-x:auto;padding:0 clamp(16px,4vw,40px)}nav button{border:0;border-bottom:3px solid transparent;border-radius:0;background:none;padding:12px 16px;white-space:nowrap}nav button[aria-current=true]{border-bottom-color:var(--blue);color:var(--blue);font-weight:600}
 .bd{font-size:11px;font-weight:600;padding:2px 8px;border-radius:10px;margin-inline-start:6px}.bd.ok{background:#e6f4ec;color:var(--ok)}.bd.part{background:#fdf1dc;color:var(--amber)}.bd.plan{background:#eceff3;color:var(--mute)}
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:12px 0}.cards .kpi{background:#fff;border:1px solid var(--line);border-radius:6px}
-@media print{header{display:none}#pg-batch>section:first-of-type{display:none}.noprint{display:none}}
+@media print{#bres.stale #bsheet,#bstale{display:none}header{display:none}#pg-batch>section:first-of-type{display:none}.noprint{display:none}}
+#bres.stale #bsheet{opacity:.35}
 @media print{nav,header .seg,.left,#status,.hl button{display:none}main{display:block}}
 </style>
 </head>
@@ -105,11 +106,11 @@ nav{background:#fff;border-bottom:1px solid var(--line);display:flex;overflow-x:
 <div id="pg-batch" class="page pg">
 <section><h2>Batch formulation &amp; scaling <span class="bd part">Draft calculation aid</span></h2><div class="body">
  <p class="small">Scales a per-unit recipe to a batch size, adds the handling loss, corrects for raw-material assay and LOD, and keeps the batch total constant through one compensating filler. It is <b>not</b> a validated GMP/BPR system: results must be checked and approved by qualified personnel.</p>
- <div class="bar"><button type="button" id="bex">Load example (Paracetamol 500 mg)</button><select id="bsaved" aria-label="saved recipes"></select><button type="button" id="bsave">Save recipe (this browser)</button></div>
+ <div class="bar"><button type="button" id="bex">Load example (Paracetamol 500 mg)</button><button type="button" id="bclear">Clear form</button><select id="bsaved" aria-label="saved recipes"></select><button type="button" id="bsave">Save recipe (this browser)</button></div>
  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px"><div><label>Product</label><input id="bp" maxlength="120"></div><div><label>Requested units</label><input id="bu" type="number" min="1" step="1"></div><div><label>Unit label</label><input id="bl" maxlength="20" value="tablets"></div><div><label>Handling loss %</label><input id="bs" type="number" min="0" max="20" step="0.1"></div><div><label>Assay basis</label><select id="bb"><option value="dried">Dried basis (apply assay and LOD)</option><option value="as_is">As-is (assay only)</option></select></div></div>
  <div style="overflow:auto"><table class="m" id="brec"></table></div>
  <div class="bar"><button type="button" id="badd">Add ingredient</button><button type="button" class="primary" id="bcalc" style="width:auto">Calculate batch</button></div><div id="bmsg"></div></div></section>
-<section id="bres" hidden><h2 class="hl"><span>Batch calculation sheet</span><span class="noprint"><button type="button" id="bprint">Print / PDF</button> <button type="button" id="bcsv">CSV</button> <button type="button" id="bjson">JSON</button></span></h2><div class="body" id="bsheet"></div></section>
+<section id="bres" hidden><h2 class="hl"><span>Batch calculation sheet</span><span class="noprint"><button type="button" id="bprint">Print / PDF</button> <button type="button" id="bcsv">CSV</button> <button type="button" id="bjson">JSON</button></span></h2><div class="body"><p id="bstale" class="small" style="color:var(--bad);font-weight:600" hidden>⚠ Inputs changed after the last calculation. Click “Calculate batch” again before printing or exporting.</p><div id="bsheet"></div></div></section>
 </div>
 <div id="pg-data" class="page pg"><section><h2>Dataset manager <span class="bd ok">Saved on server</span></h2><div class="body"><p class="small">Upload a CSV, check the preview, map columns and units, then save it as a <b>calibration</b> or an independent <b>validation</b> dataset. The original file is stored unchanged.</p>
  <input id="dsfile" type="file" accept=".csv,.txt" aria-label="CSV"><div id="dsmap"></div><div id="dslist"></div></div></section>
@@ -290,19 +291,24 @@ $("fitrun").onclick=async()=>{const ms=[...document.querySelectorAll(".fm:checke
 const ROLES=["API","Diluent / Filler","Disintegrant","Binder","Lubricant","Glidant","Coating","Other"],BKEY="af_batch";
 let BR={product:"",requested_units:1000,unit_label:"tablets",loss_pct:0,assay_basis:"dried",lines:[]},BOUT=null;
 const bget=()=>{try{return JSON.parse(localStorage.getItem(BKEY)||"{}")}catch(e){return{}}},bput=o=>{try{localStorage.setItem(BKEY,JSON.stringify(o))}catch(e){}};
-function bRender(){$("bp").value=BR.product;$("bu").value=BR.requested_units;$("bl").value=BR.unit_label;$("bs").value=BR.loss_pct;$("bb").value=BR.assay_basis;
+function bRender(){$("bp").value=BR.product;$("bu").value=BR.requested_units===0?"":BR.requested_units;$("bl").value=BR.unit_label;$("bs").value=BR.loss_pct;$("bb").value=BR.assay_basis;
  $("brec").innerHTML="<tr><th>Ingredient</th><th>Role</th><th>mg / unit</th><th>Assay %</th><th>LOD %</th><th title='Fills the batch total'>Compensates</th><th></th></tr>";
  BR.lines.forEach((l,i)=>{const r=document.createElement("tr");r.innerHTML=`<td><input value="${esc(l.name)}" maxlength="80"></td><td><select>${ROLES.map(x=>`<option ${x==l.role?"selected":""}>${x}</option>`).join("")}</select></td><td><input type="number" min="0" step="any" value="${l.mg_per_unit}"></td><td><input type="number" min="0" max="100" step="any" value="${l.assay_pct}"></td><td><input type="number" min="0" max="99.99" step="any" value="${l.lod_pct}"></td><td style="text-align:center"><input type="radio" name="bcomp" ${l.compensates?"checked":""} style="width:auto"></td><td><button type="button" class="x">✕</button></td>`;
-  const q=r.querySelectorAll("input,select");q[0].oninput=e=>l.name=e.target.value;q[1].onchange=e=>l.role=e.target.value;q[2].oninput=e=>l.mg_per_unit=+e.target.value;q[3].oninput=e=>l.assay_pct=+e.target.value;q[4].oninput=e=>l.lod_pct=+e.target.value;q[5].onchange=()=>BR.lines.forEach((m,j)=>m.compensates=j==i);
+  const q=r.querySelectorAll("input,select");q[0].oninput=e=>l.name=e.target.value;q[1].onchange=e=>l.role=e.target.value;q[2].oninput=e=>l.mg_per_unit=e.target.value===""?"":+e.target.value;q[3].oninput=e=>l.assay_pct=+e.target.value;q[4].oninput=e=>l.lod_pct=+e.target.value;q[5].onchange=()=>BR.lines.forEach((m,j)=>m.compensates=j==i);
   r.querySelector("button").onclick=()=>{BR.lines.splice(i,1);bRender()};$("brec").appendChild(r)});
  const sv=bget();$("bsaved").innerHTML='<option value="">— saved recipes —</option>'+Object.keys(sv).map(k=>`<option>${esc(k)}</option>`).join("")}
+const BEMPTY=()=>({product:"",requested_units:"",unit_label:"tablets",loss_pct:0,assay_basis:"dried",lines:[{name:"",role:"API",mg_per_unit:"",assay_pct:100,lod_pct:0,compensates:false}]});
+function bStale(on){$("bres").classList.toggle("stale",on);$("bstale").hidden=!on;["bprint","bcsv","bjson"].forEach(i=>$(i).disabled=on)}
+function bReset(next){BR=next;BOUT=null;$("bres").hidden=true;$("bmsg").innerHTML="";bStale(false);bRender()}
 const bRead=()=>{BR.product=$("bp").value;BR.requested_units=Math.round(+$("bu").value);BR.unit_label=$("bl").value||"units";BR.loss_pct=+$("bs").value||0;BR.assay_basis=$("bb").value};
-$("bex").onclick=async()=>{BR=await (await fetch("/api/batch/example")).json();bRender();$("bres").hidden=true};
+$("bex").onclick=async()=>bReset(await (await fetch("/api/batch/example")).json());
+$("bclear").onclick=()=>bReset(BEMPTY());
+document.querySelector("#pg-batch>section").addEventListener("input",()=>{if(BOUT)bStale(true)});document.querySelector("#pg-batch>section").addEventListener("change",()=>{if(BOUT)bStale(true)});
 $("badd").onclick=()=>{BR.lines.push({name:"",role:"Other",mg_per_unit:0,assay_pct:100,lod_pct:0,compensates:false});bRender()};
 $("bsave").onclick=()=>{bRead();const n=prompt("Recipe name",BR.product);if(!n)return;const sv=bget();sv[n.slice(0,60)]=JSON.parse(JSON.stringify(BR));bput(sv);bRender()};
 $("bsaved").onchange=e=>{const r=bget()[e.target.value];if(r){BR=JSON.parse(JSON.stringify(r));bRender()}};
 $("bcalc").onclick=async()=>{bRead();$("bmsg").innerHTML="";try{const r=await fetch("/api/batch/calculate",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(BR)}),j=await r.json();
- if(!r.ok){$("bres").hidden=true;$("bmsg").innerHTML=errs_(j);return}BOUT=j;bShow(j)}catch(e){$("bmsg").innerHTML=`<p class="small" style="color:var(--bad)">${t("net")}</p>`}};
+ if(!r.ok){$("bres").hidden=true;$("bmsg").innerHTML=errs_(j);return}BOUT=j;bStale(false);bShow(j)}catch(e){$("bmsg").innerHTML=`<p class="small" style="color:var(--bad)">${t("net")}</p>`}};
 const k3=x=>Number(x).toLocaleString("en",{minimumFractionDigits:3,maximumFractionDigits:3});
 function bShow(j){const i=j.inputs;$("bres").hidden=false;
  $("bsheet").innerHTML=`<p style="margin:0;font-weight:600;font-size:15px">DRAFT calculation sheet — not an approved batch record</p>
@@ -310,7 +316,7 @@ function bShow(j){const i=j.inputs;$("bres").hidden=false;
  <table class="m"><tr><th>Ingredient</th><th>Role</th><th>Assay %</th><th>LOD %</th><th>Factor</th><th>Theoretical (kg)</th><th>Actual weight (kg)</th><th>Difference (kg)</th></tr>${j.lines.map(l=>rn(esc(l.name)+(l.compensating?" <span class='small'>(compensating)</span>":""),esc(l.role),l.assay_pct,l.lod_pct,l.correction_factor.toFixed(4),k3(l.theoretical_kg),"<b>"+k3(l.actual_kg)+"</b>",(l.difference_kg>0?"+":"")+k3(l.difference_kg))).join("")}${rn("<b>Total</b>","","","","",k3(j.totals.theoretical_kg),"<b>"+k3(j.totals.actual_kg)+"</b>",k3(j.totals.mass_balance_difference_kg))}</table>
  ${j.warnings.map(w=>`<p class="small" style="color:var(--amber)">⚠ ${esc(w)}</p>`).join("")}<details class="noprint"><summary>Formulas</summary><ul>${j.formulas.map(f=>`<li><code>${esc(f)}</code></li>`).join("")}</ul></details>
  <table class="m" style="margin-top:18px"><tr><th>Prepared by (name / signature / date)</th><th>Checked by (name / signature / date)</th><th>QA approval (name / signature / date)</th></tr><tr><td style="height:70px"></td><td></td><td></td></tr></table><p class="small">${esc(j.disclaimer)}</p>`}
-$("bprint").onclick=()=>window.print();
+$("bprint").onclick=()=>{if(!$("bres").classList.contains("stale"))window.print()};
 $("bjson").onclick=()=>BOUT&&dlf(`astraflux_batch_${BOUT.calc_id}.json`,JSON.stringify(BOUT,null,1),"application/json");
 $("bcsv").onclick=()=>{if(!BOUT)return;const q=v=>'"'+String(v).replace(/"/g,'""')+'"',h=["ingredient","role","assay_pct","lod_pct","correction_factor","theoretical_kg","actual_kg","difference_kg"];
  dlf(`astraflux_batch_${BOUT.calc_id}.csv`,[h.join(","),...BOUT.lines.map(l=>[l.name,l.role,l.assay_pct,l.lod_pct,l.correction_factor,l.theoretical_kg,l.actual_kg,l.difference_kg].map(q).join(",")),["TOTAL","","","","",BOUT.totals.theoretical_kg,BOUT.totals.actual_kg,BOUT.totals.mass_balance_difference_kg].map(q).join(",")].join("\r\n"),"text/csv")};

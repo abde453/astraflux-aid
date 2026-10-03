@@ -1,0 +1,7 @@
+ONE small edit is needed in your existing file  astraflux/api.py :
+Open it in Notepad and add these 2 lines at the VERY END of the file, then save:
+
+from .batch_api import attach
+attach(app)
+
+After restarting the program, open:   http://localhost:8000/batch      (or your site address + /batch)
